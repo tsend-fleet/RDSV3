@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a2235">
+
+  <script>
+    (function(){
+      var m = localStorage.getItem('delta_theme_mode') || 'light';
+      if (m === 'auto') m = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.classList.add(m === 'light' ? 'light' : 'dark');
+    })();
+  </script>
+
+  <title>Service Detail</title>
+  <meta name="description" content="">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"></noscript>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--c-bg); color: var(--c-text); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500; vertical-align: middle; }
+    .btn-magnetic { will-change: transform; }
+    [data-faq-panel] { transition: max-height 0.3s ease; }
+  </style>
+</head>
+<body data-delta-app="service" class="bg-background text-on-background">
+
+  <header class="sticky top-0 z-[100] bg-surface-container/95 backdrop-blur border-b border-outline/20">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-2 font-manrope font-black text-lg text-on-background">
+        <span class="material-symbols-outlined text-cta">emergency</span>
+        <span data-delta="brand">…</span>
+      </a>
+      <nav id="delta-nav" class="hidden md:flex items-center gap-6 text-sm font-medium text-on-surface-variant"></nav>
+      <div class="flex items-center gap-2">
+        <button data-delta-trigger="theme-toggle" aria-label="Toggle theme" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded hover:bg-surface-container-high">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <a data-delta-trigger="call" href="tel:+18065550140" class="hidden md:inline-flex items-center gap-2 bg-cta hover:bg-cta-hover text-white font-bold px-4 h-10 rounded text-sm">
+          <span class="material-symbols-outlined">call</span><span data-delta="phoneDisplay">(806) 555-0140</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="service-content"></div>
+    <div id="not-found" style="display:none" class="max-w-2xl mx-auto px-4 py-24 text-center">
+      <h1 class="font-manrope font-black text-3xl text-on-background mb-4">Service not found</h1>
+      <p class="text-on-surface-variant mb-6">The service you're looking for isn't on file. View all services or call us 24/7.</p>
+      <a href="index.html#services" class="inline-flex items-center gap-2 bg-cta hover:bg-cta-hover text-white font-bold px-5 py-3 rounded">← All Services</a>
+    </div>
+  </main>
+
+  <!-- Sticky Mobile CTA Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex items-stretch justify-around bg-header-bg border-t-4 shadow-[0_-4px_12px_rgba(0,0,0,0.4)] h-20"
+       style="border-top-color: var(--c-accent)" aria-label="Emergency dispatch actions">
+    <a data-delta-trigger="call" href="tel:+18065550140" aria-label="Call us"
+       class="flex flex-col items-center justify-center bg-cta text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta-hover">
+      <span class="material-symbols-outlined mb-1">call</span><span data-delta="ui.mobileCTA.callLabel">CALL</span>
+    </a>
+    <a data-delta-trigger="text" href="sms:+18065550140" aria-label="Text us"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">chat</span><span data-delta="ui.mobileCTA.textLabel">TEXT</span>
+    </a>
+    <button data-delta-trigger="location" aria-label="Share location"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">location_on</span><span data-delta="ui.mobileCTA.locationLabel">LOCATION</span>
+    </button>
+  </nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="delta-engine.js"></script>
+  <script>
+    (async function () {
+      try {
+        const c = await DeltaEngine.loadContent();
+        DeltaEngine.applyTheme(c);
+        DeltaEngine.bindThemeToggle();
+        DeltaEngine.injectSEO(c);
+        DeltaEngine.applyStaticFields(c);
+        DeltaEngine.renderNavItems(c);
+        const id = new URLSearchParams(location.search).get('id');
+        const service = (c.services || []).find(s => s.id === id);
+        if (!service) {
+          document.getElementById('not-found').style.display = '';
+          document.getElementById('service-content').style.display = 'none';
+        } else {
+          DeltaEngine.renderServiceDetail(c, service);
+          DeltaEngine.injectServiceSchema(c, service);
+        }
+        DeltaEngine.applyUIStrings(c);
+        DeltaEngine.bindMobileCTABar(c);
+        DeltaEngine.bindGSAPAnimations(c);
+        DeltaEngine.bindMagneticButtons();
+      } catch (err) {
+        console.error('[service.html] boot failed:', err);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a2235">
+
+  <script>
+    (function(){
+      var m = localStorage.getItem('delta_theme_mode') || 'light';
+      if (m === 'auto') m = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.classList.add(m === 'light' ? 'light' : 'dark');
+    })();
+  </script>
+
+  <title>Contact Dispatch — 24/7</title>
+  <meta name="description" content="">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"></noscript>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--c-bg); color: var(--c-text); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500; vertical-align: middle; }
+    .btn-magnetic { will-change: transform; }
+    [data-faq-panel] { transition: max-height 0.3s ease; }
+  </style>
+</head>
+<body data-delta-app="contact" class="bg-background text-on-background">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-[100] bg-surface-container/95 backdrop-blur border-b border-outline/20">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2 font-manrope font-black text-lg text-on-background">
+        <span class="material-symbols-outlined text-cta">emergency</span>
+        <span data-delta="brand">…</span>
+      </a>
+      <nav id="delta-nav" class="hidden md:flex items-center gap-6 text-sm font-medium text-on-surface-variant"></nav>
+      <div class="flex items-center gap-2">
+        <button data-delta-trigger="theme-toggle" aria-label="Toggle theme" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded hover:bg-surface-container-high">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <a data-delta-trigger="call" href="tel:+18065550140" class="hidden md:inline-flex items-center gap-2 bg-cta hover:bg-cta-hover text-white font-bold px-4 h-10 rounded text-sm">
+          <span class="material-symbols-outlined">call</span>
+          <span data-delta="phoneDisplay">…</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="py-14 md:py-20 bg-header-bg text-white text-center">
+      <div class="max-w-3xl mx-auto px-4">
+        <div class="inline-flex items-center gap-2 bg-cta text-white px-4 py-1.5 rounded-full mb-5 text-xs font-bold uppercase tracking-wider">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+          </span>
+          Live Dispatch — 24/7
+        </div>
+        <h1 data-delta="ui.contactPage.heroHeading" class="font-manrope font-black text-4xl md:text-5xl mb-4">Contact Dispatch — 24/7</h1>
+        <p data-delta="ui.contactPage.heroSubheading" class="text-white/80 text-lg mb-6">Stranded? Calling is fastest. Average dispatch in 22 minutes on I-40.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a data-delta-trigger="call" href="tel:+18065550140"
+             class="btn-magnetic inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-white font-manrope font-extrabold px-8 py-4 rounded-xl text-2xl shadow-[0_10px_25px_-5px_rgba(225,6,0,0.5)] transition-all">
+            <span class="material-symbols-outlined text-3xl">call</span>
+            <span data-delta="phoneDisplay">…</span>
+          </a>
+          <a data-delta-trigger="text" href="sms:+18065550140"
+             class="btn-magnetic inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-manrope font-extrabold px-8 py-4 rounded-xl text-lg transition-all">
+            <span class="material-symbols-outlined">chat</span><span data-delta="ui.contactPage.textButton">TEXT US</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two-column layout -->
+    <section class="py-16 bg-surface-container-low">
+      <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+
+        <!-- Left: Dispatch form -->
+        <div>
+          <h2 class="font-manrope font-black text-2xl md:text-3xl text-on-background mb-2">Dispatch Request Form</h2>
+          <p class="text-on-surface-variant mb-6 text-sm">If you're stranded, calling is fastest. Use this form to schedule ahead or ask a question.</p>
+          <form id="contact-dispatch-form" data-delta-form="dispatch" class="grid gap-3">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" id="form-subject" value="New Dispatch Request">
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background">Name <span class="text-cta">*</span></span>
+              <input required name="name" class="h-12 bg-surface-container border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background">Phone <span class="text-cta">*</span></span>
+              <input required name="phone" type="tel" class="h-12 bg-surface-container border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background">Vehicle Type</span>
+              <input name="vehicleType" placeholder="e.g. 2022 F-150 / Class 8 Freightliner" class="h-12 bg-surface-container border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background">Service Needed <span class="text-cta">*</span></span>
+              <select required name="serviceNeeded" id="service-select" class="h-12 bg-surface-container border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+                <option value="">Select…</option>
+              </select>
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background">Location / Exit # <span class="text-cta">*</span></span>
+              <div class="flex gap-2">
+                <input required name="location" id="dispatch-location" placeholder="e.g. I-40 Exit 75 westbound"
+                  class="h-12 bg-surface-container border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors flex-1">
+                <button type="button" id="geo-btn" title="Use my current location"
+                  class="h-12 px-3 bg-surface-container border border-outline/40 rounded-lg text-cta hover:bg-surface-container-high transition-colors flex-shrink-0"
+                  aria-label="Use my location">
+                  <span class="material-symbols-outlined">my_location</span>
+                </button>
+              </div>
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background">Notes</span>
+              <textarea name="notes" rows="3" class="bg-surface-container border border-outline/40 rounded-lg px-3 py-2 text-on-background focus:border-cta outline-none transition-colors resize-none"></textarea>
+            </label>
+            <button type="submit"
+               class="btn-magnetic h-12 bg-cta hover:bg-cta-hover text-white font-manrope font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined">send</span>Send Dispatch Request
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Contact info + map -->
+        <div class="grid gap-6 content-start">
+          <div class="bg-surface-container border border-outline/20 rounded-xl p-6" data-aos="fade-left">
+            <div data-delta="ui.contactPage.infoHeading" class="font-manrope font-black text-xl text-on-background mb-4">Dispatch HQ</div>
+            <div class="grid gap-4">
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-cta text-xl flex-shrink-0">location_on</span>
+                <div>
+                  <div data-delta="ui.contactPage.addressLabel" class="text-sm font-medium text-on-background">Address</div>
+                  <div class="text-on-surface-variant text-sm" data-delta="address">…</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-cta text-xl flex-shrink-0">call</span>
+                <div>
+                  <div class="text-sm font-medium text-on-background">Phone / Text</div>
+                  <a data-delta-trigger="call" href="tel:+18065550140" class="text-2xl font-manrope font-black text-cta hover:underline">
+                    <span data-delta="phoneDisplay">…</span>
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-cta text-xl flex-shrink-0">email</span>
+                <div>
+                  <div data-delta="ui.contactPage.emailLabel" class="text-sm font-medium text-on-background">Email</div>
+                  <a id="contact-email-link" href="#" class="text-on-surface-variant text-sm hover:text-cta transition-colors">…</a>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-cta text-xl flex-shrink-0">schedule</span>
+                <div>
+                  <div data-delta="ui.contactPage.hoursLabel" class="text-sm font-medium text-on-background">Hours</div>
+                  <div class="text-on-surface-variant text-sm" id="contact-hours">24/7 Dispatch</div>
+                  <div class="text-xs text-on-surface-variant mt-0.5" id="contact-dispatch-note">…</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="aspect-[16/10] rounded-xl overflow-hidden border border-outline/20" data-aos="fade-left" data-aos-delay="100">
+            <iframe id="contact-map" src="" class="w-full h-full border-0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Service area map"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works (injected) -->
+    <div id="how-it-works-root"></div>
+
+    <!-- Trust badges (injected) -->
+    <div id="trust-badges-root"></div>
+  </main>
+
+  <!-- Footer -->
+  <div id="delta-footer"></div>
+
+  <!-- Sticky Mobile CTA Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex items-stretch justify-around bg-header-bg border-t-4 shadow-[0_-4px_12px_rgba(0,0,0,0.4)] h-20"
+       style="border-top-color: var(--c-accent)" aria-label="Emergency dispatch actions">
+    <a data-delta-trigger="call" href="tel:+18065550140" aria-label="Call us"
+       class="flex flex-col items-center justify-center bg-cta text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta-hover">
+      <span class="material-symbols-outlined mb-1">call</span><span data-delta="ui.mobileCTA.callLabel">CALL</span>
+    </a>
+    <a data-delta-trigger="text" href="sms:+18065550140" aria-label="Text us"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">chat</span><span data-delta="ui.mobileCTA.textLabel">TEXT</span>
+    </a>
+    <button data-delta-trigger="location" aria-label="Share location"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">location_on</span><span data-delta="ui.mobileCTA.locationLabel">LOCATION</span>
+    </button>
+  </nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="delta-engine.js"></script>
+  <script>
+    (async function () {
+      try {
+        const c = await DeltaEngine.loadContent();
+        DeltaEngine.applyTheme(c);
+        DeltaEngine.bootstrapTheme();
+        DeltaEngine.bindThemeToggle();
+        DeltaEngine.injectSEO(c);
+        DeltaEngine.applyStaticFields(c);
+        DeltaEngine.renderNavItems(c);
+        document.title = 'Contact Dispatch — 24/7 | ' + (c.brand || '');
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.content = 'Contact ' + (c.brand || '') + ' for 24/7 roadside dispatch in Amarillo & I-40. Submit a dispatch request or call ' + (c.phoneDisplay || '') + ' now. Average ETA 22 minutes.';
+        // Populate form subject
+        const formSubject = document.getElementById('form-subject');
+        if (formSubject) formSubject.value = 'New Dispatch Request — ' + (c.brand || '');
+        // Populate service select
+        const svcSelect = document.getElementById('service-select');
+        if (svcSelect && c.services) {
+          svcSelect.innerHTML = '<option value="">Select…</option>' +
+            c.services.map(sv => `<option value="${DeltaEngine.escHtml(sv.title)}">${DeltaEngine.escHtml(sv.title)}</option>`).join('');
+        }
+        // Populate contact info
+        const emailLink = document.getElementById('contact-email-link');
+        if (emailLink && c.email) { emailLink.href = 'mailto:' + c.email; emailLink.textContent = c.email; }
+        const hoursEl = document.getElementById('contact-hours');
+        if (hoursEl && c.hoursWeekday) hoursEl.textContent = c.hoursWeekday;
+        const dispatchNoteEl = document.getElementById('contact-dispatch-note');
+        if (dispatchNoteEl && c.dispatchNote) dispatchNoteEl.textContent = c.dispatchNote;
+        // Map embed
+        const mapIframe = document.getElementById('contact-map');
+        if (mapIframe && c.address) mapIframe.src = DeltaEngine.buildMapEmbedSrc(c.address);
+        // How it works
+        const howEl = document.getElementById('how-it-works-root');
+        if (howEl) howEl.outerHTML = DeltaEngine.renderHowItWorks(c);
+        // Trust badges
+        const badgesEl = document.getElementById('trust-badges-root');
+        if (badgesEl) badgesEl.outerHTML = DeltaEngine.renderTrustBadges(c);
+        // Footer
+        const footerEl = document.getElementById('delta-footer');
+        if (footerEl) footerEl.innerHTML = DeltaEngine.renderFooter(c);
+        DeltaEngine.applyUIStrings(c);
+        // Geolocation button
+        const geoBtn = document.getElementById('geo-btn');
+        const locInput = document.getElementById('dispatch-location');
+        if (geoBtn && locInput && navigator.geolocation) {
+          geoBtn.addEventListener('click', () => {
+            geoBtn.disabled = true;
+            geoBtn.innerHTML = '<span class="material-symbols-outlined">progress_activity</span>';
+            navigator.geolocation.getCurrentPosition(
+              async (pos) => {
+                const { latitude: lat, longitude: lon } = pos.coords;
+                try {
+                  const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+                  const data = await res.json();
+                  const road = data.address && (data.address.road || data.address.highway || '');
+                  const city = data.address && (data.address.city || data.address.town || data.address.county || '');
+                  locInput.value = [road, city].filter(Boolean).join(', ') || `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+                } catch { locInput.value = `${lat.toFixed(4)}, ${lon.toFixed(4)}`; }
+                geoBtn.disabled = false;
+                geoBtn.innerHTML = '<span class="material-symbols-outlined">my_location</span>';
+              },
+              () => {
+                geoBtn.disabled = false;
+                geoBtn.innerHTML = '<span class="material-symbols-outlined">my_location</span>';
+              },
+              { timeout: 8000 }
+            );
+          });
+        }
+        // Form submission
+        const form = document.getElementById('contact-dispatch-form');
+        if (form) {
+          form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = c.email || '';
+            if (!email) { DeltaEngine.toast('No dispatch email configured', 'error'); return; }
+            const fd = new FormData(form);
+            if (fd.get('_honey')) return;
+            const submit = form.querySelector('button[type="submit"]');
+            const orig = submit.innerHTML;
+            submit.disabled = true;
+            submit.innerHTML = '<span class="material-symbols-outlined">progress_activity</span> Sending…';
+            try {
+              const r = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(fd))
+              });
+              if (!r.ok) throw new Error('Network error');
+              DeltaEngine.toast("Dispatch request sent! We'll call you within 2 minutes.", 'success');
+              form.reset();
+            } catch (err) {
+              DeltaEngine.toast('Could not send — please call ' + (c.phoneDisplay || ''), 'error');
+            } finally {
+              submit.disabled = false;
+              submit.innerHTML = orig;
+            }
+          });
+        }
+        DeltaEngine.bindMobileCTABar(c);
+        DeltaEngine.bindGSAPAnimations(c);
+        DeltaEngine.bindMagneticButtons();
+        if (window.AOS) AOS.init({ once: true, duration: 600 });
+      } catch (err) {
+        console.error('[contact.html] boot failed:', err);
+      }
+    })();
+  </script>
+</body>
+</html>

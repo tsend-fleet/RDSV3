@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin Panel</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"></noscript>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0b1220; color: #e2e8f0; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500; vertical-align: middle; }
+    .field-label { display:block; font-size:12px; font-weight:600; color:#94a3b8; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.04em; }
+    .field-input { width:100%; height:40px; background:#020617; border:1px solid #1e293b; border-radius:6px; padding:0 12px; color:#e2e8f0; font-size:14px; }
+    textarea.field-input { height:auto; padding:10px 12px; min-height:80px; resize:vertical; }
+    .field-hint { font-size:11px; color:#64748b; margin-top:4px; }
+    .field-wrapper { margin-bottom:14px; }
+    details > summary { list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display:none; }
+    details[open] > summary .chev { transform: rotate(90deg); }
+    .chev { transition: transform 0.2s; display:inline-block; }
+    .row-ctl { display:inline-flex; align-items:center; justify-content:center; height:28px; width:28px; border:1px solid #1e293b; border-radius:6px; background:#020617; color:#94a3b8; cursor:pointer; }
+    .row-ctl:hover { color:#10b981; border-color:#10b981; }
+    .row-ctl.danger:hover { color:#ef4444; border-color:#ef4444; }
+    .chip { display:inline-flex; align-items:center; gap:6px; background:#1e293b; border:1px solid #334155; padding:4px 8px; border-radius:6px; font-size:12px; }
+    .chip button { background:none; border:0; color:#94a3b8; cursor:pointer; padding:0; line-height:1; }
+    .chip button:hover { color:#ef4444; }
+    .section-card { border-left: 4px solid var(--accent, #e10600); background:#111827; border:1px solid #1e293b; border-left-width:4px; border-radius:8px; margin-bottom:14px; }
+    .section-card > summary { padding:14px 16px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; font-size:13px; color:#e10600; }
+    .section-card > div { padding:0 16px 16px; }
+  </style>
+</head>
+<body>
+
+<!-- Login overlay -->
+<div id="login-overlay" class="fixed inset-0 z-[200] bg-slate-950 flex items-center justify-center p-4">
+  <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 max-w-sm w-full">
+    <div class="flex items-center gap-2 mb-6">
+      <span class="material-symbols-outlined text-red-500 text-3xl">emergency</span>
+      <span class="font-manrope font-black text-xl text-white">Admin Panel</span>
+    </div>
+    <label class="field-label">Password</label>
+    <input id="login-pwd" type="password" class="field-input" placeholder="Enter admin password">
+    <button id="login-btn" class="mt-4 w-full h-11 bg-red-600 hover:bg-red-500 text-white font-bold rounded">Unlock</button>
+    <p id="login-error" class="text-red-400 text-xs mt-3 hidden">Wrong password.</p>
+  </div>
+</div>
+
+<!-- Topbar -->
+<header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 h-14 flex items-center px-4 gap-3">
+  <div class="flex items-center gap-2 mr-auto">
+    <span class="material-symbols-outlined text-red-500">emergency</span>
+    <span class="font-manrope font-black text-white">Panhandle 24/7</span>
+    <span class="text-xs text-slate-500 hidden md:inline">/ admin</span>
+  </div>
+  <button id="reload-btn" class="h-9 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">refresh</span><span class="hidden md:inline">Reload</span></button>
+  <button id="push-btn" class="h-9 px-4 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">cloud_upload</span>Save &amp; Push</button>
+  <a href="admin1.html" class="h-9 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">design_services</span><span class="hidden md:inline">Visual Editor</span></a>
+  <a href="index.html" target="_blank" class="h-9 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">open_in_new</span><span class="hidden md:inline">View Site</span></a>
+</header>
+
+<!-- Layout -->
+<div class="flex">
+  <!-- Editor -->
+  <div class="flex-1 p-4 max-w-3xl">
+
+    <details class="section-card" open style="--accent:#10b981; border-left-color:#10b981">
+      <summary style="color:#10b981"><span class="chev">▸</span>  🔑  GitHub Configuration</summary>
+      <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="field-wrapper">
+            <label class="field-label">Repo Path (owner/repo)</label>
+            <input id="gh-repo" class="field-input" placeholder="e.g. tsend-fleet/AmarilloRDS">
+          </div>
+          <div class="field-wrapper">
+            <label class="field-label">Fine-Grained PAT (github_pat_…)</label>
+            <input id="gh-token" type="password" class="field-input" placeholder="github_pat_…" autocomplete="off">
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-1">
+          <button id="gh-creds-save" class="h-10 px-4 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded inline-flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">save</span>Save Credentials
+          </button>
+          <button id="gh-creds-clear" class="h-10 px-4 bg-red-700 hover:bg-red-600 text-xs font-bold text-white rounded inline-flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">delete</span>Clear
+          </button>
+          <a id="gh-token-generate" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" class="h-10 px-4 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 rounded inline-flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">open_in_new</span>Generate Token →
+          </a>
+        </div>
+        <div class="field-hint mt-3">
+          Required scope: <span class="text-emerald-400 font-semibold">Repository → Contents → Read and Write</span> (only this repo).
+          Stored in <code class="text-slate-300">localStorage</code> as <code class="text-slate-300">delta_gh_token</code> + <code class="text-slate-300">delta_repo_path</code>. Never committed to code.
+        </div>
+      </div>
+    </details>
+
+    <details class="section-card" open>
+      <summary><span class="chev">▸</span>  Brand & Contact</summary>
+      <div id="sec-brand"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Stats Bar</summary>
+      <div id="sec-stats"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Trust Badges</summary>
+      <div id="sec-badges"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Hero</summary>
+      <div id="sec-hero"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Service Categories</summary>
+      <div id="sec-cats"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Services</summary>
+      <div id="sec-services"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  How It Works</summary>
+      <div id="sec-how"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  About</summary>
+      <div id="sec-about"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Reviews / Testimonials</summary>
+      <div id="sec-reviews"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Fleet Section</summary>
+      <div id="sec-fleet"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Service Areas (Cities)</summary>
+      <div id="sec-areas"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  I-40 Exits</summary>
+      <div id="sec-exits"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Highways</summary>
+      <div id="sec-highways"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Navigation Links</summary>
+      <div id="sec-nav"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Pages (Block Editor)</summary>
+      <div id="sec-pages"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Animation Engine</summary>
+      <div id="sec-anim"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  SEO & Schema (incl. Keyword Bank)</summary>
+      <div id="sec-seo"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Theme & Colors</summary>
+      <div id="sec-theme"></div>
+    </details>
+
+    <details class="section-card">
+      <summary><span class="chev">▸</span>  Popup</summary>
+      <div id="sec-popup"></div>
+    </details>
+
+  </div>
+
+  <!-- Live JSON sidebar -->
+  <aside class="w-[360px] border-l border-slate-800 bg-slate-900 sticky top-14 self-start max-h-[calc(100vh-3.5rem)] overflow-auto p-3 hidden lg:block">
+    <div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">Live JSON</div>
+    <pre id="json-preview" class="text-xs text-slate-300 whitespace-pre-wrap break-words leading-relaxed"></pre>
+  </aside>
+</div>
+
+<script src="delta-engine.js"></script>
+<script>
+'use strict';
+const ADMIN_PASSWORD = 'RDSIDE123';
+const ICON_OPTIONS = ['emergency','local_shipping','build','business_center','tire_repair','battery_charging_full','key','local_gas_station','settings_suggest','fire_truck','route','engineering','rv_hookup','compress','filter_alt','call','share_location','task_alt','speed','location_on','star','verified','schedule','handshake','price_check'];
+const ANIM_OPTIONS = ['fade-up','fade-down','fade-left','fade-right','zoom-in','zoom-out','flip-up','flip-down','slide-up','slide-down','scramble-reveal ★','parallax-scroll ★','stagger-fade ★','magnetic-pop ★'];
+const PLATFORM_OPTIONS = ['google','yelp','facebook','direct'];
+
+let DATA = null;
+
+// ── Login gate ───────────────────────────────────────────────────────
+function unlock() {
+  document.getElementById('login-overlay').style.display = 'none';
+  sessionStorage.setItem('delta_admin_unlocked', '1');
+  boot();
+}
+document.getElementById('login-btn').addEventListener('click', () => {
+  const pwd = document.getElementById('login-pwd').value;
+  if (pwd === ADMIN_PASSWORD) unlock();
+  else document.getElementById('login-error').classList.remove('hidden');
+});
+document.getElementById('login-pwd').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('login-btn').click(); });
+if (sessionStorage.getItem('delta_admin_unlocked') === '1') unlock();
+
+// ── Token + repo persistence ─────────────────────────────────────────
+const ghTokenEl = document.getElementById('gh-token');
+const ghRepoEl  = document.getElementById('gh-repo');
+ghTokenEl.value = localStorage.getItem('delta_gh_token')  || '';
+ghRepoEl.value  = localStorage.getItem('delta_repo_path') || '';
+document.getElementById('gh-creds-save').addEventListener('click', () => {
+  localStorage.setItem('delta_gh_token',  ghTokenEl.value.trim());
+  localStorage.setItem('delta_repo_path', ghRepoEl.value.trim());
+  DeltaEngine.toast('GitHub credentials saved', 'success');
+});
+document.getElementById('gh-creds-clear').addEventListener('click', () => {
+  localStorage.removeItem('delta_gh_token');
+  localStorage.removeItem('delta_repo_path');
+  ghTokenEl.value = ''; ghRepoEl.value = '';
+  DeltaEngine.toast('Credentials cleared', 'info');
+});
+document.getElementById('reload-btn').addEventListener('click', boot);
+document.getElementById('push-btn').addEventListener('click', pushToGitHub);
+
+// ── Helpers ──────────────────────────────────────────────────────────
+const esc = DeltaEngine.escHtml;
+function field(label, id, value, hint, type) {
+  type = type || 'text';
+  const tag = type === 'textarea'
+    ? `<textarea class="field-input" data-bind="${id}" rows="3">${esc(value || '')}</textarea>`
+    : `<input class="field-input" data-bind="${id}" type="${type}" value="${esc(value || '')}">`;
+  return `<div class="field-wrapper"><label class="field-label">${esc(label)}</label>${tag}${hint ? `<div class="field-hint">${esc(hint)}</div>` : ''}</div>`;
+}
+function selectField(label, id, value, options) {
+  return `<div class="field-wrapper"><label class="field-label">${esc(label)}</label>
+    <select class="field-input" data-bind="${id}">
+      ${options.map(o => `<option value="${esc(o)}" ${o === value ? 'selected' : ''}>${esc(o)}</option>`).join('')}
+    </select></div>`;
+}
+function rowCtl(idx, listKey, len) {
+  return `<div class="flex gap-1 ml-auto">
+    <button class="row-ctl" data-row-up="${listKey}|${idx}" ${idx === 0 ? 'disabled style="opacity:0.3"' : ''}>↑</button>
+    <button class="row-ctl" data-row-down="${listKey}|${idx}" ${idx === len - 1 ? 'disabled style="opacity:0.3"' : ''}>↓</button>
+    <button class="row-ctl danger" data-row-rm="${listKey}|${idx}">✕</button>
+  </div>`;
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────
+async function boot() {
+  try {
+    DATA = await DeltaEngine.loadContent();
+    document.title = 'Admin · ' + (DATA.brand || 'Admin Panel');
+    renderAll();
+    refreshJson();
+    DeltaEngine.toast('Content loaded', 'success');
+  } catch (e) {
+    DeltaEngine.toast('Failed to load content.json: ' + e.message, 'error');
+  }
+}
+
+function renderAll() {
+  renderBrand(); renderStats(); renderBadges(); renderHero();
+  renderCats(); renderServices(); renderHow(); renderAbout();
+  renderReviews(); renderFleet(); renderAreas(); renderExits();
+  renderHighways(); renderNav(); renderPages(); renderAnim();
+  renderSEO(); renderTheme(); renderPopup();
+}
+function refreshJson() {
+  document.getElementById('json-preview').textContent = JSON.stringify(DATA, null, 2);
+}
+
+// ── Section renderers ────────────────────────────────────────────────
+function renderBrand() {
+  document.getElementById('sec-brand').innerHTML =
+    field('Brand', 'brand', DATA.brand) +
+    field('Tagline', 'tagline', DATA.tagline, '', 'textarea') +
+    field('Phone (E.164)', 'phone', DATA.phone, '+18065550140 format') +
+    field('Phone Display', 'phoneDisplay', DATA.phoneDisplay) +
+    field('WhatsApp', 'whatsapp', DATA.whatsapp) +
+    field('Email', 'email', DATA.email) +
+    field('Address', 'address', DATA.address) +
+    field('Hours (Weekday)', 'hoursWeekday', DATA.hoursWeekday) +
+    field('Hours (Weekend)', 'hoursWeekend', DATA.hoursWeekend) +
+    field('Dispatch Note', 'dispatchNote', DATA.dispatchNote) +
+    field('Announcement Bar', 'announcement', DATA.announcement, 'Top emergency banner');
+}
+function renderStats() {
+  const s = DATA.stats || (DATA.stats = {});
+  document.getElementById('sec-stats').innerHTML =
+    field('Dispatches Completed', 'stats.dispatches',  s.dispatches) +
+    field('Avg Response Time',    'stats.responseTime', s.responseTime) +
+    field('Years Serving',        'stats.yearsServing', s.yearsServing) +
+    field('Cities Served',        'stats.citiesServed', s.citiesServed) +
+    field('Customer Rating',      'stats.rating',       s.rating);
+}
+function renderBadges() {
+  DATA.trustBadges = DATA.trustBadges || [];
+  const html = DATA.trustBadges.map((b, i) => `
+    <div class="border border-slate-800 rounded p-3 mb-2 flex flex-col gap-2 bg-slate-950">
+      <div class="flex items-center justify-between">
+        <span class="text-xs text-slate-500">Badge ${i + 1}</span>
+        ${rowCtl(i, 'trustBadges', DATA.trustBadges.length)}
+      </div>
+      ${selectField('Icon',  `trustBadges.${i}.icon`,    b.icon, ICON_OPTIONS)}
+      ${field('Label',       `trustBadges.${i}.label`,   b.label)}
+      ${field('Sub-label',   `trustBadges.${i}.sublabel`, b.sublabel)}
+    </div>`).join('');
+  document.getElementById('sec-badges').innerHTML = html +
+    `<button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="trustBadges">+ Add Badge</button>`;
+}
+function renderHero() {
+  const h = DATA.hero || (DATA.hero = {});
+  document.getElementById('sec-hero').innerHTML =
+    field('H1 Title',    'hero.title',    h.title) +
+    field('Subtitle',    'hero.subtitle', h.subtitle, '', 'textarea') +
+    field('ETA Label',   'hero.etaLabel', h.etaLabel) +
+    field('ETA Minutes', 'hero.etaMinutes', h.etaMinutes) +
+    field('CTA 1 Label', 'hero.cta1Label', h.cta1Label) +
+    field('CTA 1 Href',  'hero.cta1Href',  h.cta1Href) +
+    field('CTA 2 Label', 'hero.cta2Label', h.cta2Label) +
+    field('CTA 2 Href',  'hero.cta2Href',  h.cta2Href) +
+    field('Hero Image URL', 'hero.image',  h.image, 'Used by imgTag — Unsplash, Drive, Dropbox supported');
+}
+function renderCats() {
+  DATA.serviceCategories = DATA.serviceCategories || [];
+  const html = DATA.serviceCategories.map((cat, i) => `
+    <div class="border border-slate-800 rounded p-3 mb-2 bg-slate-950">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-xs text-slate-500">Category ${i + 1}</span>
+        ${rowCtl(i, 'serviceCategories', DATA.serviceCategories.length)}
+      </div>
+      ${field('ID (slug)',       `serviceCategories.${i}.id`,    cat.id)}
+      ${field('Label',           `serviceCategories.${i}.label`, cat.label)}
+      ${selectField('Icon',      `serviceCategories.${i}.icon`,  cat.icon, ICON_OPTIONS)}
+      ${field('Hub Page ID',     `serviceCategories.${i}.hubPageId`, cat.hubPageId)}
+      <div class="mt-2 flex gap-2">
+        <button class="h-8 px-3 bg-emerald-700 hover:bg-emerald-600 text-xs text-white rounded" data-genhub="${i}">Generate Hub Page</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('sec-cats').innerHTML = html +
+    `<div class="flex gap-2 mt-2">
+      <button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="serviceCategories">+ Add Category</button>
+      <button class="h-9 px-4 bg-emerald-700 hover:bg-emerald-600 text-xs text-white rounded" data-genallhub>Generate All Hub Pages</button>
+    </div>`;
+}
+function renderServices() {
+  DATA.services = DATA.services || [];
+  const catOpts = ['', ...(DATA.serviceCategories || []).map(c => c.id)];
+  const html = DATA.services.map((sv, i) => `
+    <details class="border border-slate-800 rounded mb-2 bg-slate-950">
+      <summary class="px-3 py-2 flex items-center justify-between text-sm">
+        <span class="font-bold text-slate-200">${esc(sv.title || '(untitled)')}</span>
+        ${rowCtl(i, 'services', DATA.services.length)}
+      </summary>
+      <div class="p-3 pt-0">
+        ${field('ID (slug)',         `services.${i}.id`,        sv.id)}
+        ${field('Display Category',  `services.${i}.category`,  sv.category)}
+        ${selectField('Parent Category (silo)', `services.${i}.parentCategory`, sv.parentCategory, catOpts)}
+        ${selectField('Icon',        `services.${i}.icon`,      sv.icon, ICON_OPTIONS)}
+        ${field('Title',             `services.${i}.title`,     sv.title)}
+        ${field('Short Description', `services.${i}.shortDesc`, sv.shortDesc, '', 'textarea')}
+        ${field('Long Description',  `services.${i}.longDesc`,  sv.longDesc, '', 'textarea')}
+        ${field('Badge',             `services.${i}.badge`,     sv.badge)}
+        ${field('Image URL',         `services.${i}.image`,     sv.image)}
+        <div class="mt-3">
+          <div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">Pricing</div>
+          ${(sv.pricing || []).map((p, pi) => `
+            <div class="flex gap-2 mb-2 items-end">
+              <div class="flex-1">${field('Label', `services.${i}.pricing.${pi}.label`, p.label)}</div>
+              <div class="w-24">${field('Price', `services.${i}.pricing.${pi}.price`, p.price)}</div>
+              <div class="flex-1">${field('Note', `services.${i}.pricing.${pi}.note`, p.note)}</div>
+              <button class="row-ctl danger mb-3.5" data-row-rm="services.${i}.pricing|${pi}">✕</button>
+            </div>`).join('')}
+          <button class="h-8 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="services.${i}.pricing">+ Add Price Row</button>
+        </div>
+        <div class="mt-3">
+          <div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">FAQ</div>
+          ${(sv.faq || []).map((f, fi) => `
+            <div class="border border-slate-800 rounded p-2 mb-2">
+              ${field('Q', `services.${i}.faq.${fi}.q`, f.q)}
+              ${field('A', `services.${i}.faq.${fi}.a`, f.a, '', 'textarea')}
+              <button class="row-ctl danger" data-row-rm="services.${i}.faq|${fi}">✕ Remove FAQ</button>
+            </div>`).join('')}
+          <button class="h-8 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="services.${i}.faq">+ Add FAQ</button>
+        </div>
+        <div class="mt-3">
+          ${field('Related Services (comma-separated IDs)', `services.${i}.relatedServices`, (sv.relatedServices || []).join(','), 'e.g. jump-start,fuel-delivery')}
+        </div>
+      </div>
+    </details>`).join('');
+  document.getElementById('sec-services').innerHTML = html +
+    `<button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="services">+ Add Service</button>`;
+}
+function renderHow() {
+  DATA.howItWorks = DATA.howItWorks || [];
+  const html = DATA.howItWorks.map((s, i) => `
+    <div class="border border-slate-800 rounded p-3 mb-2 bg-slate-950">
+      <div class="flex justify-between mb-1"><span class="text-xs text-slate-500">Step ${i + 1}</span>${rowCtl(i, 'howItWorks', DATA.howItWorks.length)}</div>
+      ${selectField('Icon', `howItWorks.${i}.icon`, s.icon, ICON_OPTIONS)}
+      ${field('Title',      `howItWorks.${i}.title`, s.title)}
+      ${field('Description',`howItWorks.${i}.desc`,  s.desc, '', 'textarea')}
+    </div>`).join('');
+  document.getElementById('sec-how').innerHTML = html +
+    `<button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="howItWorks">+ Add Step</button>`;
+}
+function renderAbout() {
+  const a = DATA.about || (DATA.about = {});
+  document.getElementById('sec-about').innerHTML =
+    field('Title', 'about.title', a.title) +
+    field('Paragraph 1', 'about.p1', a.p1, '', 'textarea') +
+    field('Paragraph 2', 'about.p2', a.p2, '', 'textarea') +
+    field('Image URL',  'about.image', a.image);
+}
+function renderReviews() {
+  DATA.reviews = DATA.reviews || [];
+  const svcIds = ['', ...(DATA.services || []).map(s => s.id)];
+  const html = DATA.reviews.map((r, i) => `
+    <details class="border border-slate-800 rounded mb-2 bg-slate-950">
+      <summary class="px-3 py-2 text-sm flex justify-between"><span class="font-bold text-slate-200">${esc(r.author || '(unnamed)')} — ${esc(r.location || '')}</span>${rowCtl(i, 'reviews', DATA.reviews.length)}</summary>
+      <div class="p-3 pt-0">
+        ${field('Author',      `reviews.${i}.author`,   r.author)}
+        ${field('Location',    `reviews.${i}.location`, r.location)}
+        ${field('Rating (1–5)', `reviews.${i}.rating`,   r.rating, '', 'number')}
+        ${field('Text',        `reviews.${i}.text`,     r.text, '', 'textarea')}
+        ${field('Date',        `reviews.${i}.date`,     r.date, 'YYYY-MM-DD')}
+        ${selectField('Platform', `reviews.${i}.platform`, r.platform, PLATFORM_OPTIONS)}
+        ${selectField('Service Linked', `reviews.${i}.serviceId`, r.serviceId, svcIds)}
+        ${field('Response Time', `reviews.${i}.responseTime`, r.responseTime, 'e.g. 19 min')}
+        ${field('Photo URL',     `reviews.${i}.photo`,    r.photo)}
+      </div>
+    </details>`).join('');
+  document.getElementById('sec-reviews').innerHTML = html +
+    `<button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="reviews">+ Add Review</button>`;
+}
+function renderFleet() {
+  const f = DATA.fleet || (DATA.fleet = {});
+  document.getElementById('sec-fleet').innerHTML =
+    field('Title',     'fleet.title',    f.title) +
+    field('Subtitle',  'fleet.subtitle', f.subtitle) +
+    field('Body',      'fleet.body',     f.body, '', 'textarea') +
+    field('Image URL', 'fleet.image',    f.image);
+}
+function renderAreas() {
+  DATA.serviceAreas = DATA.serviceAreas || [];
+  const html = DATA.serviceAreas.map((a, i) => `
+    <details class="border border-slate-800 rounded mb-2 bg-slate-950">
+      <summary class="px-3 py-2 text-sm flex justify-between"><span class="font-bold text-slate-200">${esc(a.city || '')}, ${esc(a.state || '')}</span>${rowCtl(i, 'serviceAreas', DATA.serviceAreas.length)}</summary>
+      <div class="p-3 pt-0">
+        ${field('City',   `serviceAreas.${i}.city`,   a.city)}
+        ${field('State',  `serviceAreas.${i}.state`,  a.state)}
+        ${field('Slug',   `serviceAreas.${i}.slug`,   a.slug)}
+        ${field('Drive Time', `serviceAreas.${i}.driveTime`, a.driveTime)}
+        ${field('Lat',    `serviceAreas.${i}.lat`,    a.lat)}
+        ${field('Lng',    `serviceAreas.${i}.lng`,    a.lng)}
+        ${field('Neighborhoods (comma)', `serviceAreas.${i}.neighborhoods`, (a.neighborhoods || []).join(','))}
+        ${field('Meta Title',       `serviceAreas.${i}.metaTitle`, a.metaTitle)}
+        ${field('Meta Description', `serviceAreas.${i}.metaDescription`, a.metaDescription, '', 'textarea')}
+        <button class="h-8 px-3 bg-emerald-700 hover:bg-emerald-600 text-xs text-white rounded mt-2" data-gencity="${i}">Generate City Page</button>
+      </div>
+    </details>`).join('');
+  document.getElementById('sec-areas').innerHTML = html +
+    `<div class="flex gap-2 mt-2">
+      <button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="serviceAreas">+ Add City</button>
+      <button class="h-9 px-4 bg-emerald-700 hover:bg-emerald-600 text-xs text-white rounded" data-genallcity>Generate All Missing</button>
+    </div>`;
+}
+function renderExits() {
+  DATA.i40Exits = DATA.i40Exits || [];
+  const html = DATA.i40Exits.map((x, i) => `
+    <details class="border border-slate-800 rounded mb-2 bg-slate-950">
+      <summary class="px-3 py-2 text-sm flex justify-between"><span class="font-bold text-slate-200">Exit ${esc(x.exit || '?')} — ${esc(x.name || '')}</span>${rowCtl(i, 'i40Exits', DATA.i40Exits.length)}</summary>
+      <div class="p-3 pt-0">
+        ${field('Exit #', `i40Exits.${i}.exit`, x.exit)}
+        ${field('Name',   `i40Exits.${i}.name`, x.name)}
+        ${field('City',   `i40Exits.${i}.city`, x.city)}
+        ${field('Slug',   `i40Exits.${i}.slug`, x.slug)}
+        ${field('Mile Marker', `i40Exits.${i}.mileMarker`, x.mileMarker)}
+        ${field('Meta Title', `i40Exits.${i}.metaTitle`, x.metaTitle)}
+        ${field('Meta Description', `i40Exits.${i}.metaDescription`, x.metaDescription, '', 'textarea')}
+        <button class="h-8 px-3 bg-emerald-700 hover:bg-emerald-600 text-xs text-white rounded mt-2" data-genexit="${i}">Generate Exit Page</button>
+      </div>
+    </details>`).join('');
+  document.getElementById('sec-exits').innerHTML = html +
+    `<div class="flex gap-2 mt-2">
+      <button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="i40Exits">+ Add Exit</button>
+      <button class="h-9 px-4 bg-emerald-700 hover:bg-emerald-600 text-xs text-white rounded" data-genallexit>Generate All Missing</button>
+    </div>`;
+}
+function renderHighways() {
+  DATA.highways = DATA.highways || [];
+  const html = DATA.highways.map((h, i) => `
+    <div class="border border-slate-800 rounded p-3 mb-2 bg-slate-950">
+      <div class="flex justify-between mb-1">${rowCtl(i, 'highways', DATA.highways.length)}</div>
+      ${field('Name',  `highways.${i}.name`,  h.name)}
+      ${field('Label', `highways.${i}.label`, h.label)}
+      ${field('Slug',  `highways.${i}.slug`,  h.slug)}
+    </div>`).join('');
+  document.getElementById('sec-highways').innerHTML = html +
+    `<button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="highways">+ Add Highway</button>`;
+}
+function renderNav() {
+  DATA.nav = DATA.nav || [];
+  const html = DATA.nav.map((n, i) => `
+    <div class="border border-slate-800 rounded p-3 mb-2 bg-slate-950">
+      <div class="flex justify-between mb-1">${rowCtl(i, 'nav', DATA.nav.length)}</div>
+      ${field('Label', `nav.${i}.label`, n.label)}
+      ${field('Href',  `nav.${i}.href`,  n.href)}
+    </div>`).join('');
+  document.getElementById('sec-nav').innerHTML = html +
+    `<button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="nav">+ Add Link</button>`;
+}
+function renderPages() {
+  DATA.pages = DATA.pages || [];
+  const html = DATA.pages.map((p, i) => `
+    <details class="border border-slate-800 rounded mb-2 bg-slate-950">
+      <summary class="px-3 py-2 text-sm flex justify-between"><span class="font-bold text-slate-200">${esc(p.title || p.id || '')}</span>${rowCtl(i, 'pages', DATA.pages.length)}</summary>
+      <div class="p-3 pt-0">
+        ${field('ID (slug)',         `pages.${i}.id`,    p.id)}
+        ${field('Title',             `pages.${i}.title`, p.title)}
+        ${field('Meta Description',  `pages.${i}.metaDescription`, p.metaDescription, '', 'textarea')}
+        <label class="flex items-center gap-2 text-sm text-slate-300 mb-3">
+          <input type="checkbox" data-bind="pages.${i}.showInNav" ${p.showInNav ? 'checked' : ''}> Show in Nav
+        </label>
+        <div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">Blocks</div>
+        ${(p.blocks || []).map((b, bi) => `
+          <div class="border border-slate-800 rounded p-2 mb-2 bg-slate-900">
+            <div class="flex gap-2 items-center mb-2">
+              <span class="text-xs text-slate-500">Block ${bi + 1} — ${esc(b.type)}</span>
+              ${rowCtl(bi, 'pages.' + i + '.blocks', (p.blocks || []).length)}
+            </div>
+            ${selectField('Type', `pages.${i}.blocks.${bi}.type`, b.type, ['heading','paragraph','image','link','spacer','divider'])}
+            ${b.type === 'heading' ? field('Content', `pages.${i}.blocks.${bi}.content`, b.content) + selectField('Level', `pages.${i}.blocks.${bi}.level`, b.level || 'h2', ['h1','h2','h3','h4']) : ''}
+            ${b.type === 'paragraph' ? field('Content', `pages.${i}.blocks.${bi}.content`, b.content, '', 'textarea') : ''}
+            ${b.type === 'image' ? field('Src', `pages.${i}.blocks.${bi}.src`, b.src) + field('Alt', `pages.${i}.blocks.${bi}.alt`, b.alt) : ''}
+            ${b.type === 'link' ? field('Label', `pages.${i}.blocks.${bi}.label`, b.label) + field('Href', `pages.${i}.blocks.${bi}.href`, b.href) + selectField('Style', `pages.${i}.blocks.${bi}.style`, b.style || 'inline', ['inline','button']) : ''}
+            ${b.type === 'spacer' ? selectField('Size', `pages.${i}.blocks.${bi}.size`, b.size || 'medium', ['small','medium','large']) : ''}
+          </div>`).join('')}
+        <button class="h-8 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add-block="${i}">+ Add Block</button>
+      </div>
+    </details>`).join('');
+  document.getElementById('sec-pages').innerHTML = html +
+    `<button class="h-9 px-4 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="pages">+ Add Page</button>`;
+}
+function renderAnim() {
+  DATA.animations = DATA.animations || {};
+  const sections = ['hero','stats','trust','services','howItWorks','about','reviews','fleet','contact','footer','etaBadge'];
+  document.getElementById('sec-anim').innerHTML = sections.map(s =>
+    selectField(s, 'animations.' + s, DATA.animations[s] || 'fade-up', ANIM_OPTIONS.map(o => o.replace(' ★','')))
+  ).join('') + `<div class="field-hint">★ marks GSAP-driven premium modes (handled outside AOS).</div>`;
+}
+function renderSEO() {
+  const s = DATA.seo || (DATA.seo = {});
+  s.keywordBank = s.keywordBank || {};
+  const buckets = [
+    ['primary',      'A. Primary Money',         'Hero/H1/meta. Primary $ keywords.'],
+    ['longTail',     'B. Long-tail / Near-me',   'Service shortDesc. Captures intent.'],
+    ['geoCity',      'C. Geo / City',            'City pages + headers.'],
+    ['i40Exits',     'D. I-40 Exits (Moat)',     'Highway exit pages.'],
+    ['fleet',        'E. Fleet / B2B',           'Fleet hub copy.'],
+    ['problemAware', 'F. Problem-aware',         'Service longDesc. "My truck broke down…"'],
+    ['lsi',          'G. LSI / Supporting',      'Sprinkled throughout body copy.'],
+    ['entities',     'H. Schema-friendly Entities','Knowledge graph signals.']
+  ];
+  let html = '';
+  html += field('Default Title',       'seo.defaultTitle',       s.defaultTitle, '', 'textarea');
+  html += field('Default Description', 'seo.defaultDescription', s.defaultDescription, '120–160 chars', 'textarea');
+  html += field('Default Keywords (auto-flattened from bank)', 'seo.defaultKeywords', s.defaultKeywords, '', 'textarea');
+  html += field('Geo Region', 'seo.geoRegion', s.geoRegion, 'e.g. US-TX');
+  html += field('Geo Placename', 'seo.geoPlacename', s.geoPlacename);
+  html += field('Geo Lat', 'seo.geoLat', s.geoLat);
+  html += field('Geo Lng', 'seo.geoLng', s.geoLng);
+  html += field('Canonical Base', 'seo.canonicalBase', s.canonicalBase, 'https://yourdomain.com (no trailing /)');
+  html += field('Phone (E.164)', 'seo.phone', s.phone);
+  html += field('USDOT #', 'seo.dotNumber', s.dotNumber);
+  html += field('Rating Value', 'seo.ratingValue', s.ratingValue);
+  html += field('Review Count', 'seo.reviewCount', s.reviewCount);
+  html += field('Service Radius (meters)', 'seo.serviceRadiusMeters', s.serviceRadiusMeters, 'GeoCircle radius. 160934 = 100mi');
+
+  html += `<div class="mt-4"><div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">Social Links (drives JSON-LD sameAs[])</div>`;
+  s.socialLinks = s.socialLinks || [];
+  s.socialLinks.forEach((l, i) => {
+    html += `<div class="flex gap-2 mb-2 items-end"><div class="w-32">${field('Label', `seo.socialLinks.${i}.label`, l.label)}</div><div class="flex-1">${field('URL', `seo.socialLinks.${i}.url`, l.url)}</div><button class="row-ctl danger mb-3.5" data-row-rm="seo.socialLinks|${i}">✕</button></div>`;
+  });
+  html += `<button class="h-8 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded" data-add="seo.socialLinks">+ Add Social Link</button></div>`;
+
+  html += `<div class="mt-6"><div class="flex items-center justify-between mb-3">
+    <span class="text-sm uppercase tracking-wider font-bold text-emerald-400">🔑 Keyword Bank (8 buckets)</span>
+    <div class="flex gap-2">
+      <button id="kw-regen"   class="h-8 px-3 bg-emerald-700 hover:bg-emerald-600 text-xs text-white rounded">🔄 Regenerate defaultKeywords</button>
+      <button id="kw-csv"     class="h-8 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded">📋 Export CSV</button>
+    </div>
+  </div>`;
+  buckets.forEach(([key, label, intent]) => {
+    const list = s.keywordBank[key] || (s.keywordBank[key] = []);
+    html += `
+      <details class="bg-slate-900 border border-slate-800 rounded p-3 mb-2" open>
+        <summary class="cursor-pointer font-bold text-emerald-400 text-sm">${label} <span class="text-slate-500 font-normal text-xs">(${list.length})</span></summary>
+        <p class="text-slate-400 text-xs mt-1 mb-2">${intent}</p>
+        <div class="flex flex-wrap gap-1 mb-2" data-bucket-list="${key}">
+          ${list.map((kw, i) => `<span class="chip">${esc(kw)}<button data-kw-remove="${key}|${i}" aria-label="Remove">×</button></span>`).join('')}
+        </div>
+        <form class="flex gap-2" data-kw-add="${key}">
+          <input type="text" placeholder="Add keyword/phrase…" class="flex-1 h-9 bg-slate-950 border border-slate-700 px-2 text-slate-100 rounded text-xs">
+          <button type="submit" class="h-9 px-3 bg-emerald-600 hover:bg-emerald-500 text-xs text-white rounded">+ Add</button>
+        </form>
+      </details>`;
+  });
+  html += `</div>`;
+
+  s.metaTemplates = s.metaTemplates || {};
+  html += `<div class="mt-6"><div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">Meta Templates</div>`;
+  ['service','city','exit','hub'].forEach(k => {
+    html += field(k, `seo.metaTemplates.${k}`, s.metaTemplates[k]);
+  });
+  html += `</div>`;
+
+  document.getElementById('sec-seo').innerHTML = html;
+  document.getElementById('kw-regen').addEventListener('click', () => {
+    const all = Object.values(s.keywordBank).flat();
+    DATA.seo.defaultKeywords = all.join(', ');
+    renderSEO(); refreshJson();
+    DeltaEngine.toast('defaultKeywords regenerated', 'success');
+  });
+  document.getElementById('kw-csv').addEventListener('click', () => {
+    const rows = [['bucket','keyword']];
+    Object.entries(s.keywordBank).forEach(([b, list]) => list.forEach(k => rows.push([b, k])));
+    const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'keyword-bank.csv'; a.click();
+  });
+}
+function renderTheme() {
+  const t = DATA.theme || (DATA.theme = { dark: {}, light: {} });
+  const tokens = ['bg','surface','surface-alt','surface-deep','surface-emphasis','text','text-muted','border','cta','cta-hover','accent','header-bg'];
+  let html = `<div class="grid grid-cols-2 gap-4">
+    <div><div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">Dark Palette</div>`;
+  tokens.forEach(tk => {
+    html += `<div class="flex gap-2 mb-2 items-center"><div class="w-8 h-8 rounded border border-slate-700" style="background:${esc(t.dark[tk] || '#000')}"></div><div class="flex-1"><label class="field-label">${tk}</label><input class="field-input" data-bind="theme.dark.${tk}" value="${esc(t.dark[tk] || '')}"></div></div>`;
+  });
+  html += `</div><div><div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-2">Light Palette</div>`;
+  tokens.forEach(tk => {
+    html += `<div class="flex gap-2 mb-2 items-center"><div class="w-8 h-8 rounded border border-slate-700" style="background:${esc(t.light[tk] || '#fff')}"></div><div class="flex-1"><label class="field-label">${tk}</label><input class="field-input" data-bind="theme.light.${tk}" value="${esc(t.light[tk] || '')}"></div></div>`;
+  });
+  html += `</div></div>`;
+  html += selectField('Default Mode', 'theme.defaultMode', t.defaultMode, ['auto','dark','light']);
+  document.getElementById('sec-theme').innerHTML = html;
+}
+function renderPopup() {
+  const p = DATA.popup || (DATA.popup = {});
+  document.getElementById('sec-popup').innerHTML =
+    `<label class="flex items-center gap-2 text-sm text-slate-300 mb-3"><input type="checkbox" data-bind="popup.enabled" ${p.enabled ? 'checked' : ''}> Enabled</label>` +
+    field('Image URL', 'popup.image', p.image) +
+    field('Alt Text',  'popup.altText', p.altText) +
+    field('Link',      'popup.link',   p.link) +
+    field('Delay (ms)', 'popup.delay', p.delay, '', 'number');
+}
+
+// ── Generic input binding ────────────────────────────────────────────
+function setPath(obj, path, value) {
+  const keys = path.split('.');
+  let cur = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (cur[keys[i]] === undefined || cur[keys[i]] === null) cur[keys[i]] = isNaN(parseInt(keys[i + 1], 10)) ? {} : [];
+    cur = cur[keys[i]];
+  }
+  cur[keys[keys.length - 1]] = value;
+}
+function getPath(obj, path) {
+  return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
+}
+
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (!el.dataset || !el.dataset.bind) return;
+  let val = el.type === 'checkbox' ? el.checked : el.value;
+  if (el.dataset.bind.endsWith('relatedServices')) val = String(val).split(',').map(s => s.trim()).filter(Boolean);
+  if (el.dataset.bind.endsWith('neighborhoods')) val = String(val).split(',').map(s => s.trim()).filter(Boolean);
+  if (el.type === 'number') val = el.value === '' ? '' : Number(el.value);
+  setPath(DATA, el.dataset.bind, val);
+  refreshJson();
+});
+
+// ── List CRUD wiring ─────────────────────────────────────────────────
+function listAtPath(path) {
+  const parts = path.split('.');
+  let cur = DATA;
+  for (const p of parts) {
+    if (cur[p] === undefined) cur[p] = [];
+    cur = cur[p];
+  }
+  return cur;
+}
+function listParentAndKey(path) {
+  const parts = path.split('.');
+  const last = parts.pop();
+  let cur = DATA;
+  for (const p of parts) cur = cur[p];
+  return [cur, last];
+}
+const TEMPLATES = {
+  trustBadges:        () => ({ icon:'verified', label:'New Badge', sublabel:'' }),
+  serviceCategories:  () => ({ id:'new-cat', label:'New Category', icon:'build', hubPageId:'', accentColor:'cta' }),
+  services:           () => ({ id:'new-service', category:'', parentCategory:'', icon:'build', title:'New Service', shortDesc:'', longDesc:'', pricing:[], faq:[], badge:'', image:'', relatedServices:[] }),
+  howItWorks:         () => ({ icon:'call', title:'New Step', desc:'' }),
+  reviews:            () => ({ author:'', location:'', rating:5, text:'', date:'', platform:'google', serviceId:'', responseTime:'', photo:'' }),
+  serviceAreas:       () => ({ city:'', state:'TX', driveTime:'', slug:'', lat:'', lng:'', neighborhoods:[], metaTitle:'', metaDescription:'', showInNav:false }),
+  i40Exits:           () => ({ exit:'', name:'', city:'', slug:'', mileMarker:'', metaTitle:'', metaDescription:'' }),
+  highways:           () => ({ name:'', label:'', slug:'' }),
+  nav:                () => ({ label:'', href:'' }),
+  pages:              () => ({ id:'new-page', title:'New Page', metaDescription:'', showInNav:false, blocks:[] }),
+  pricing:            () => ({ label:'', price:'', note:'' }),
+  faq:                () => ({ q:'', a:'' }),
+  socialLinks:        () => ({ label:'', url:'' })
+};
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('button');
+  if (!t) return;
+
+  if (t.dataset.add) {
+    const path = t.dataset.add;
+    const list = listAtPath(path);
+    const key = path.split('.').pop();
+    const tmpl = TEMPLATES[key];
+    list.push(tmpl ? tmpl() : {});
+    renderAll(); refreshJson();
+    return;
+  }
+
+  if (t.dataset.rowRm) {
+    const [path, idx] = t.dataset.rowRm.split('|');
+    const list = listAtPath(path);
+    list.splice(Number(idx), 1);
+    renderAll(); refreshJson();
+    return;
+  }
+  if (t.dataset.rowUp) {
+    const [path, idx] = t.dataset.rowUp.split('|');
+    const list = listAtPath(path);
+    const i = Number(idx);
+    if (i > 0) [list[i - 1], list[i]] = [list[i], list[i - 1]];
+    renderAll(); refreshJson();
+    return;
+  }
+  if (t.dataset.rowDown) {
+    const [path, idx] = t.dataset.rowDown.split('|');
+    const list = listAtPath(path);
+    const i = Number(idx);
+    if (i < list.length - 1) [list[i + 1], list[i]] = [list[i], list[i + 1]];
+    renderAll(); refreshJson();
+    return;
+  }
+
+  if (t.dataset.gencity !== undefined) {
+    const idx = Number(t.dataset.gencity);
+    const area = DATA.serviceAreas[idx];
+    DeltaEngine.generateCityPage(area, DATA);
+    renderAll(); refreshJson();
+    DeltaEngine.toast('City page generated', 'success');
+    return;
+  }
+  if (t.dataset.genexit !== undefined) {
+    const idx = Number(t.dataset.genexit);
+    DeltaEngine.generateExitPage(DATA.i40Exits[idx], DATA);
+    renderAll(); refreshJson();
+    DeltaEngine.toast('Exit page generated', 'success');
+    return;
+  }
+  if (t.dataset.genhub !== undefined) {
+    const idx = Number(t.dataset.genhub);
+    DeltaEngine.generateHubPage(DATA.serviceCategories[idx], DATA);
+    renderAll(); refreshJson();
+    DeltaEngine.toast('Hub page generated', 'success');
+    return;
+  }
+  if (t.hasAttribute('data-genallhub')) {
+    DeltaEngine.generateAllHubPages(DATA);
+    renderAll(); refreshJson();
+    return;
+  }
+  if (t.hasAttribute('data-genallcity')) {
+    (DATA.serviceAreas || []).forEach(a => DeltaEngine.generateCityPage(a, DATA));
+    renderAll(); refreshJson();
+    DeltaEngine.toast('All missing city pages generated', 'success');
+    return;
+  }
+  if (t.hasAttribute('data-genallexit')) {
+    (DATA.i40Exits || []).forEach(x => DeltaEngine.generateExitPage(x, DATA));
+    renderAll(); refreshJson();
+    DeltaEngine.toast('All missing exit pages generated', 'success');
+    return;
+  }
+  if (t.dataset.addBlock !== undefined) {
+    const idx = Number(t.dataset.addBlock);
+    DATA.pages[idx].blocks = DATA.pages[idx].blocks || [];
+    DATA.pages[idx].blocks.push({ type:'paragraph', content:'' });
+    renderPages(); refreshJson();
+    return;
+  }
+
+  if (t.dataset.kwRemove) {
+    const [bucket, idx] = t.dataset.kwRemove.split('|');
+    DATA.seo.keywordBank[bucket].splice(Number(idx), 1);
+    renderSEO(); refreshJson();
+    return;
+  }
+});
+
+document.addEventListener('submit', e => {
+  const f = e.target.closest('form[data-kw-add]');
+  if (!f) return;
+  e.preventDefault();
+  const bucket = f.getAttribute('data-kw-add');
+  const input = f.querySelector('input');
+  const v = (input.value || '').trim();
+  if (!v) return;
+  DATA.seo.keywordBank[bucket] = DATA.seo.keywordBank[bucket] || [];
+  DATA.seo.keywordBank[bucket].push(v);
+  input.value = '';
+  renderSEO(); refreshJson();
+});
+
+// ── Push to GitHub ───────────────────────────────────────────────────
+async function pushToGitHub() {
+  const token = localStorage.getItem('delta_gh_token');
+  const repo  = localStorage.getItem('delta_repo_path');
+  if (!token || !repo) { DeltaEngine.toast('Set GitHub PAT and Repo Path first', 'error'); return; }
+  const btn = document.getElementById('push-btn');
+  const orig = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined text-base">sync</span>Pushing…';
+  try {
+    await DeltaEngine.commitContent(token, repo, DATA, 'Update content.json from admin');
+    DeltaEngine.toast('Pushed to GitHub successfully', 'success');
+  } catch (e) {
+    DeltaEngine.toast('Push failed: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.innerHTML = orig;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a2235">
+
+  <script>
+    (function(){
+      var m = localStorage.getItem('delta_theme_mode') || 'light';
+      if (m === 'auto') m = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.classList.add(m === 'light' ? 'light' : 'dark');
+    })();
+  </script>
+
+  <title>Fleet &amp; Commercial Accounts</title>
+  <meta name="description" content="">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"></noscript>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--c-bg); color: var(--c-text); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500; vertical-align: middle; }
+    .btn-magnetic { will-change: transform; }
+    [data-faq-panel] { transition: max-height 0.3s ease; }
+  </style>
+</head>
+<body data-delta-app="fleet" class="bg-background text-on-background">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-[100] bg-surface-container/95 backdrop-blur border-b border-outline/20">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2 font-manrope font-black text-lg text-on-background">
+        <span class="material-symbols-outlined text-cta">emergency</span>
+        <span data-delta="brand">…</span>
+      </a>
+      <nav id="delta-nav" class="hidden md:flex items-center gap-6 text-sm font-medium text-on-surface-variant"></nav>
+      <div class="flex items-center gap-2">
+        <button data-delta-trigger="theme-toggle" aria-label="Toggle theme" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded hover:bg-surface-container-high">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <a data-delta-trigger="call" href="tel:+18065550140" class="hidden md:inline-flex items-center gap-2 bg-cta hover:bg-cta-hover text-white font-bold px-4 h-10 rounded text-sm">
+          <span class="material-symbols-outlined">call</span>
+          <span data-delta="phoneDisplay">…</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative min-h-[60vh] flex items-center bg-header-bg text-white overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img id="fleet-hero-img" src="" alt="Commercial fleet trucks on highway" class="w-full h-full object-cover object-center brightness-[0.35]" width="1200" height="700" loading="eager">
+      </div>
+      <div class="relative z-10 max-w-6xl mx-auto px-4 py-20 w-full">
+        <div class="inline-flex items-center gap-2 bg-cta text-white px-4 py-1.5 rounded-full mb-6 text-xs font-bold uppercase tracking-wider">
+          <span class="material-symbols-outlined text-base">business_center</span>
+          Commercial Fleet Accounts
+        </div>
+        <h1 data-delta="ui.fleetPage.heroHeading" class="font-manrope font-black text-4xl md:text-6xl mb-4 tracking-tight">Fleet &amp; Commercial Accounts</h1>
+        <p id="fleet-subtitle" class="text-white/80 text-lg md:text-xl max-w-2xl mb-8">
+          NET-30 billing. Direct insurance bill. Priority dispatch.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a data-delta-trigger="call" href="tel:+18065550140"
+             class="btn-magnetic inline-flex items-center gap-2 bg-cta hover:bg-cta-hover text-white font-manrope font-extrabold px-8 py-4 rounded-xl text-lg shadow-[0_10px_25px_-5px_rgba(225,6,0,0.5)] transition-all">
+            <span class="material-symbols-outlined">call</span><span data-delta="ui.fleetPage.callButton">CALL NOW</span>
+          </a>
+          <a href="#fleet-form"
+             class="btn-magnetic inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-manrope font-extrabold px-8 py-4 rounded-xl text-lg transition-all">
+            <span class="material-symbols-outlined">description</span><span data-delta="ui.fleetPage.openAccountButton">Open an Account</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats strip -->
+    <section class="py-10 bg-surface-container-high">
+      <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="flex flex-col items-center text-center gap-2">
+          <span class="material-symbols-outlined text-cta text-4xl">receipt_long</span>
+          <div data-delta="ui.fleetPage.statNet30" class="font-manrope font-black text-xl text-on-background">NET-30 Billing</div>
+          <div class="text-on-surface-variant text-sm">Invoiced monthly</div>
+        </div>
+        <div class="flex flex-col items-center text-center gap-2">
+          <span class="material-symbols-outlined text-cta text-4xl">policy</span>
+          <div data-delta="ui.fleetPage.statDirectInsurance" class="font-manrope font-black text-xl text-on-background">Direct Insurance Bill</div>
+          <div class="text-on-surface-variant text-sm">Most major carriers</div>
+        </div>
+        <div class="flex flex-col items-center text-center gap-2">
+          <span class="material-symbols-outlined text-cta text-4xl">bolt</span>
+          <div data-delta="ui.fleetPage.statPriority" class="font-manrope font-black text-xl text-on-background">Priority I-40 Dispatch</div>
+          <div class="text-on-surface-variant text-sm">Fleet trucks first</div>
+        </div>
+        <div class="flex flex-col items-center text-center gap-2">
+          <span class="material-symbols-outlined text-cta text-4xl">headset_mic</span>
+          <div data-delta="ui.fleetPage.statDedicated" class="font-manrope font-black text-xl text-on-background">24/7 Dedicated Line</div>
+          <div class="text-on-surface-variant text-sm">Direct dispatch number</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits grid -->
+    <section class="py-16 bg-background">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 data-delta="ui.fleetPage.benefitsHeading" class="font-manrope font-black text-3xl md:text-4xl text-on-background mb-3">Fleet Account Benefits</h2>
+          <p class="text-on-surface-variant text-lg max-w-2xl mx-auto">Everything a fleet manager needs — in one account, one call, one bill.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-surface-container border border-outline/20 rounded-xl p-6" data-aos="fade-up">
+            <span class="material-symbols-outlined text-cta text-4xl mb-3 block">gps_fixed</span>
+            <div class="font-manrope font-bold text-lg text-on-background mb-2">GPS-Tracked Dispatch</div>
+            <p class="text-on-surface-variant text-sm">Every dispatch sends a live GPS link to your driver and fleet manager — real-time ETA, no guesswork.</p>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-xl p-6" data-aos="fade-up" data-aos-delay="50">
+            <span class="material-symbols-outlined text-cta text-4xl mb-3 block">local_shipping</span>
+            <div class="font-manrope font-bold text-lg text-on-background mb-2">USDOT Certified</div>
+            <p class="text-on-surface-variant text-sm">DOT# 4262689 on file. All technicians and equipment meet FMCSA requirements for commercial carrier work.</p>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-xl p-6" data-aos="fade-up" data-aos-delay="100">
+            <span class="material-symbols-outlined text-cta text-4xl mb-3 block">policy</span>
+            <div class="font-manrope font-bold text-lg text-on-background mb-2">Direct Insurance Billing</div>
+            <p class="text-on-surface-variant text-sm">We bill your insurance carrier directly — Samsara, Protective, Zurich, Travelers, and most major commercial carriers.</p>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-xl p-6" data-aos="fade-up" data-aos-delay="150">
+            <span class="material-symbols-outlined text-cta text-4xl mb-3 block">receipt_long</span>
+            <div class="font-manrope font-bold text-lg text-on-background mb-2">NET-30 Invoicing</div>
+            <p class="text-on-surface-variant text-sm">No per-incident card charges. Monthly consolidated invoice with itemized breakdown by truck and job type.</p>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
+            <span class="material-symbols-outlined text-cta text-4xl mb-3 block">bar_chart</span>
+            <div class="font-manrope font-bold text-lg text-on-background mb-2">Monthly Fleet Reports</div>
+            <p class="text-on-surface-variant text-sm">Detailed monthly reports: breakdowns by vehicle, service type, highway corridor, response time, and cost per incident.</p>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-xl p-6" data-aos="fade-up" data-aos-delay="250">
+            <span class="material-symbols-outlined text-cta text-4xl mb-3 block">verified_user</span>
+            <div class="font-manrope font-bold text-lg text-on-background mb-2">FMCSA Compliance Support</div>
+            <p class="text-on-surface-variant text-sm">Roadside DOT inspections, repair documentation, and compliance paperwork to keep your trucks legal and moving.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety Compliance (injected) -->
+    <div id="safety-compliance-root"></div>
+
+    <!-- Fleet Inquiry Form -->
+    <section id="fleet-form" class="py-16 bg-surface-container-low">
+      <div class="max-w-3xl mx-auto px-4">
+        <div class="text-center mb-10">
+          <h2 data-delta="ui.fleetPage.formHeading" class="font-manrope font-black text-3xl md:text-4xl text-on-background mb-3">Request a Fleet Account</h2>
+          <p data-delta="ui.fleetPage.formSubheading" class="text-on-surface-variant">Fill out the form below and we'll contact you within one business day with your account packet.</p>
+        </div>
+        <form id="fleet-inquiry-form" class="bg-surface-container border border-outline/20 rounded-2xl p-8 grid gap-4" onsubmit="return false;">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background"><span data-delta="ui.fleetPage.formCompanyLabel">Company Name</span> <span class="text-cta">*</span></span>
+              <input required name="companyName" placeholder="ABC Trucking LLC" class="h-12 bg-surface-container-low border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background"><span data-delta="ui.fleetPage.formManagerLabel">Fleet Manager Name</span> <span class="text-cta">*</span></span>
+              <input required name="managerName" placeholder="John Smith" class="h-12 bg-surface-container-low border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+            </label>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-on-background"><span data-delta="ui.fleetPage.formPhoneLabel">Phone</span> <span class="text-cta">*</span></span>
+              <input required name="phone" type="tel" placeholder="(806) 555-0000" class="h-12 bg-surface-container-low border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+            </label>
+            <label class="grid gap-1">
+              <span data-delta="ui.fleetPage.formEmailLabel" class="text-sm font-medium text-on-background">Email</span>
+              <input name="email" type="email" placeholder="fleet@company.com" class="h-12 bg-surface-container-low border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+            </label>
+          </div>
+          <label class="grid gap-1">
+            <span data-delta="ui.fleetPage.formVehicleCountLabel" class="text-sm font-medium text-on-background">Number of Vehicles</span>
+            <select name="vehicleCount" class="h-12 bg-surface-container-low border border-outline/40 rounded-lg px-3 text-on-background focus:border-cta outline-none transition-colors">
+              <option value="">Select range…</option>
+              <option value="1-5">1–5 vehicles</option>
+              <option value="6-15">6–15 vehicles</option>
+              <option value="16-50">16–50 vehicles</option>
+              <option value="50+">50+ vehicles</option>
+            </select>
+          </label>
+          <fieldset class="border border-outline/30 rounded-lg p-4">
+            <legend data-delta="ui.fleetPage.formVehicleTypesLabel" class="text-sm font-medium text-on-background px-2">Vehicle Types (check all that apply)</legend>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
+              <label class="flex items-center gap-2 text-sm text-on-background cursor-pointer">
+                <input type="checkbox" name="vehicleTypes" value="Semi Trucks" class="accent-cta w-4 h-4"> Semi Trucks
+              </label>
+              <label class="flex items-center gap-2 text-sm text-on-background cursor-pointer">
+                <input type="checkbox" name="vehicleTypes" value="Box Trucks" class="accent-cta w-4 h-4"> Box Trucks
+              </label>
+              <label class="flex items-center gap-2 text-sm text-on-background cursor-pointer">
+                <input type="checkbox" name="vehicleTypes" value="Delivery Vans" class="accent-cta w-4 h-4"> Delivery Vans
+              </label>
+              <label class="flex items-center gap-2 text-sm text-on-background cursor-pointer">
+                <input type="checkbox" name="vehicleTypes" value="RVs" class="accent-cta w-4 h-4"> RVs
+              </label>
+              <label class="flex items-center gap-2 text-sm text-on-background cursor-pointer">
+                <input type="checkbox" name="vehicleTypes" value="Other" class="accent-cta w-4 h-4"> Other
+              </label>
+            </div>
+          </fieldset>
+          <label class="grid gap-1">
+            <span data-delta="ui.fleetPage.formNotesLabel" class="text-sm font-medium text-on-background">Notes / Special Requirements</span>
+            <textarea name="notes" rows="3" placeholder="Primary highway corridors, special billing needs, etc." class="bg-surface-container-low border border-outline/40 rounded-lg px-3 py-2 text-on-background focus:border-cta outline-none transition-colors resize-none"></textarea>
+          </label>
+          <button type="submit"
+             class="btn-magnetic h-14 bg-cta hover:bg-cta-hover text-white font-manrope font-extrabold rounded-xl text-base transition-colors flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined">send</span><span data-delta="ui.fleetPage.formSubmit">Request Fleet Account</span>
+          </button>
+          <p class="text-xs text-on-surface-variant text-center">Or call us directly: <a data-delta-trigger="call" href="tel:+18065550140" class="text-cta hover:underline font-semibold"><span data-delta="phoneDisplay">…</span></a></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Trust badges (injected) -->
+    <div id="trust-badges-root"></div>
+  </main>
+
+  <!-- Footer -->
+  <div id="delta-footer"></div>
+
+  <!-- Sticky Mobile CTA Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex items-stretch justify-around bg-header-bg border-t-4 shadow-[0_-4px_12px_rgba(0,0,0,0.4)] h-20"
+       style="border-top-color: var(--c-accent)" aria-label="Emergency dispatch actions">
+    <a data-delta-trigger="call" href="tel:+18065550140" aria-label="Call us"
+       class="flex flex-col items-center justify-center bg-cta text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta-hover">
+      <span class="material-symbols-outlined mb-1">call</span><span data-delta="ui.mobileCTA.callLabel">CALL</span>
+    </a>
+    <a data-delta-trigger="text" href="sms:+18065550140" aria-label="Text us"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">chat</span><span data-delta="ui.mobileCTA.textLabel">TEXT</span>
+    </a>
+    <button data-delta-trigger="location" aria-label="Share location"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">location_on</span><span data-delta="ui.mobileCTA.locationLabel">LOCATION</span>
+    </button>
+  </nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="delta-engine.js"></script>
+  <script>
+    (async function () {
+      try {
+        const c = await DeltaEngine.loadContent();
+        DeltaEngine.applyTheme(c);
+        DeltaEngine.bootstrapTheme();
+        DeltaEngine.bindThemeToggle();
+        DeltaEngine.injectSEO(c);
+        DeltaEngine.applyStaticFields(c);
+        DeltaEngine.renderNavItems(c);
+        document.title = 'Fleet & Commercial Accounts | ' + (c.brand || '');
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.content = 'Open a commercial fleet account with ' + (c.brand || '') + '. NET-30 billing, direct insurance, priority I-40 dispatch. FMCSA compliant. Call ' + (c.phoneDisplay || '') + '.';
+        // Fleet hero image
+        const fleetImg = document.getElementById('fleet-hero-img');
+        if (fleetImg && c.fleet && c.fleet.image) fleetImg.src = c.fleet.image;
+        // Fleet subtitle
+        const fleetSubtitle = document.getElementById('fleet-subtitle');
+        if (fleetSubtitle && c.fleet && c.fleet.subtitle) fleetSubtitle.textContent = c.fleet.subtitle;
+        // Safety compliance
+        const scRoot = document.getElementById('safety-compliance-root');
+        if (scRoot) scRoot.outerHTML = DeltaEngine.renderSafetyCompliance(c);
+        // Trust badges
+        const badgesEl = document.getElementById('trust-badges-root');
+        if (badgesEl) badgesEl.outerHTML = DeltaEngine.renderTrustBadges(c);
+        // Render footer
+        const footerEl = document.getElementById('delta-footer');
+        if (footerEl) footerEl.innerHTML = DeltaEngine.renderFooter(c);
+        DeltaEngine.applyUIStrings(c);
+        // Form submit
+        const form = document.getElementById('fleet-inquiry-form');
+        if (form) {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            btn.textContent = 'Request Sent!';
+            btn.disabled = true;
+            DeltaEngine.toast('Fleet account request sent! We will contact you within one business day.', 'success');
+          });
+        }
+        DeltaEngine.bindMobileCTABar(c);
+        DeltaEngine.bindGSAPAnimations(c);
+        DeltaEngine.bindMagneticButtons();
+        if (window.AOS) AOS.init({ once: true, duration: 600 });
+      } catch (err) {
+        console.error('[fleet.html] boot failed:', err);
+      }
+    })();
+  </script>
+</body>
+</html>

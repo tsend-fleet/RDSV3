@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a2235">
+
+  <script>
+    (function(){
+      var m = localStorage.getItem('delta_theme_mode') || 'light';
+      if (m === 'auto') m = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.classList.add(m === 'light' ? 'light' : 'dark');
+    })();
+  </script>
+
+  <title>Transparent Flat-Rate Pricing</title>
+  <meta name="description" content="">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"></noscript>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--c-bg); color: var(--c-text); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500; vertical-align: middle; }
+    .btn-magnetic { will-change: transform; }
+    [data-faq-panel] { transition: max-height 0.3s ease; }
+  </style>
+</head>
+<body data-delta-app="pricing" class="bg-background text-on-background">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-[100] bg-surface-container/95 backdrop-blur border-b border-outline/20">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2 font-manrope font-black text-lg text-on-background">
+        <span class="material-symbols-outlined text-cta">emergency</span>
+        <span data-delta="brand">…</span>
+      </a>
+      <nav id="delta-nav" class="hidden md:flex items-center gap-6 text-sm font-medium text-on-surface-variant"></nav>
+      <div class="flex items-center gap-2">
+        <button data-delta-trigger="theme-toggle" aria-label="Toggle theme" class="hidden md:inline-flex h-10 w-10 items-center justify-center rounded hover:bg-surface-container-high">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <a data-delta-trigger="call" href="tel:+18065550140" class="hidden md:inline-flex items-center gap-2 bg-cta hover:bg-cta-hover text-white font-bold px-4 h-10 rounded text-sm">
+          <span class="material-symbols-outlined">call</span>
+          <span data-delta="phoneDisplay">…</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="py-20 md:py-24 bg-surface-container-low text-center border-b border-outline/20">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="inline-flex items-center gap-2 bg-cta/10 text-cta px-4 py-1.5 rounded-full mb-6 text-xs font-bold uppercase tracking-wider">
+          <span class="material-symbols-outlined text-base">price_check</span>
+          No Hidden Fees
+        </div>
+        <h1 data-delta="ui.pricingPage.heroHeading" class="font-manrope font-black text-4xl md:text-6xl text-on-background mb-4 tracking-tight">Transparent Flat-Rate Pricing</h1>
+        <p data-delta="ui.pricingPage.heroSubheading" class="text-on-surface-variant text-lg md:text-xl max-w-2xl mx-auto mb-10">
+          No memberships. No hidden fees. Know your cost before we arrive.
+        </p>
+        <!-- Trust callout pills -->
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="flex items-center gap-2 bg-surface-container border border-outline/20 text-on-background text-sm font-semibold px-4 py-2 rounded-full">
+            <span class="material-symbols-outlined text-cta text-base">check_circle</span><span data-delta="ui.pricingPage.trustPill1">Flat Rate Always</span>
+          </span>
+          <span class="flex items-center gap-2 bg-surface-container border border-outline/20 text-on-background text-sm font-semibold px-4 py-2 rounded-full">
+            <span class="material-symbols-outlined text-cta text-base">block</span><span data-delta="ui.pricingPage.trustPill2">No Membership</span>
+          </span>
+          <span class="flex items-center gap-2 bg-surface-container border border-outline/20 text-on-background text-sm font-semibold px-4 py-2 rounded-full">
+            <span class="material-symbols-outlined text-cta text-base">schedule</span><span data-delta="ui.pricingPage.trustPill3">Quoted Before We Start</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing tables (injected) -->
+    <section class="py-16 bg-background">
+      <div class="max-w-7xl mx-auto px-4">
+        <div id="pricing-root" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+        <p class="text-xs text-on-surface-variant text-center mt-6">All rates quoted before work begins. Actual cost depends on vehicle class, distance, and parts. No surprise bills.</p>
+      </div>
+    </section>
+
+    <!-- FAQ Strip -->
+    <section class="py-16 bg-surface-container-low">
+      <div class="max-w-3xl mx-auto px-4">
+        <h2 data-delta="ui.pricingPage.faqHeading" class="font-manrope font-black text-2xl md:text-3xl text-on-background text-center mb-8">Pricing FAQ</h2>
+        <div class="grid gap-3" id="pricing-faq">
+          <div class="bg-surface-container border border-outline/20 rounded-lg overflow-hidden">
+            <button data-faq-trigger class="w-full text-left px-5 py-4 flex items-center justify-between gap-3 hover:bg-surface-container-high transition-colors">
+              <span data-delta="ui.pricingPage.faq1Q" class="font-semibold text-on-background">Is there a callout fee?</span>
+              <span class="material-symbols-outlined text-on-surface-variant flex-shrink-0">expand_more</span>
+            </button>
+            <div data-faq-panel class="px-5 overflow-hidden" style="max-height:0">
+              <p data-delta="ui.pricingPage.faq1A" class="py-4 text-on-surface-variant text-sm">No — you pay the flat service rate only. There is no separate callout or trip fee on top of the service price.</p>
+            </div>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-lg overflow-hidden">
+            <button data-faq-trigger class="w-full text-left px-5 py-4 flex items-center justify-between gap-3 hover:bg-surface-container-high transition-colors">
+              <span data-delta="ui.pricingPage.faq2Q" class="font-semibold text-on-background">Do prices include parts?</span>
+              <span class="material-symbols-outlined text-on-surface-variant flex-shrink-0">expand_more</span>
+            </button>
+            <div data-faq-panel class="px-5 overflow-hidden" style="max-height:0">
+              <p data-delta="ui.pricingPage.faq2A" class="py-4 text-on-surface-variant text-sm">Labor is flat rate. Parts are at cost — no markup. We tell you the parts price before we order or install anything.</p>
+            </div>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-lg overflow-hidden">
+            <button data-faq-trigger class="w-full text-left px-5 py-4 flex items-center justify-between gap-3 hover:bg-surface-container-high transition-colors">
+              <span data-delta="ui.pricingPage.faq3Q" class="font-semibold text-on-background">Do you accept cards?</span>
+              <span class="material-symbols-outlined text-on-surface-variant flex-shrink-0">expand_more</span>
+            </button>
+            <div data-faq-panel class="px-5 overflow-hidden" style="max-height:0">
+              <p data-delta="ui.pricingPage.faq3A" class="py-4 text-on-surface-variant text-sm">Yes — all major credit and debit cards, cash, and commercial NET-30 accounts for fleet clients.</p>
+            </div>
+          </div>
+          <div class="bg-surface-container border border-outline/20 rounded-lg overflow-hidden">
+            <button data-faq-trigger class="w-full text-left px-5 py-4 flex items-center justify-between gap-3 hover:bg-surface-container-high transition-colors">
+              <span data-delta="ui.pricingPage.faq4Q" class="font-semibold text-on-background">Can I get a quote before you arrive?</span>
+              <span class="material-symbols-outlined text-on-surface-variant flex-shrink-0">expand_more</span>
+            </button>
+            <div data-faq-panel class="px-5 overflow-hidden" style="max-height:0">
+              <p data-delta="ui.pricingPage.faq4A" class="py-4 text-on-surface-variant text-sm">Yes — always. We give you the flat rate before dispatch. No surprises on the bill.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA section -->
+    <section class="py-16 bg-cta text-white text-center">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 data-delta="ui.pricingPage.ctaHeading" class="font-manrope font-black text-3xl md:text-4xl mb-3">Ready to Get Back on the Road?</h2>
+        <p data-delta="ui.pricingPage.ctaSubheading" class="text-white/85 text-lg mb-8">Call now for a flat-rate quote. Average dispatch in 22 minutes on I-40.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a data-delta-trigger="call" href="tel:+18065550140"
+             class="btn-magnetic inline-flex items-center justify-center gap-2 bg-white text-cta hover:bg-white/90 font-manrope font-extrabold px-8 py-4 rounded-xl text-lg transition-all">
+            <span class="material-symbols-outlined">call</span>
+            <span data-delta="phoneDisplay">…</span>
+          </a>
+          <a data-delta-trigger="text" href="sms:+18065550140"
+             class="btn-magnetic inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 border border-white/40 text-white font-manrope font-extrabold px-8 py-4 rounded-xl text-lg transition-all">
+            <span class="material-symbols-outlined">chat</span>TEXT US
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="delta-footer"></div>
+
+  <!-- Sticky Mobile CTA Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex items-stretch justify-around bg-header-bg border-t-4 shadow-[0_-4px_12px_rgba(0,0,0,0.4)] h-20"
+       style="border-top-color: var(--c-accent)" aria-label="Emergency dispatch actions">
+    <a data-delta-trigger="call" href="tel:+18065550140" aria-label="Call us"
+       class="flex flex-col items-center justify-center bg-cta text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta-hover">
+      <span class="material-symbols-outlined mb-1">call</span><span data-delta="ui.mobileCTA.callLabel">CALL</span>
+    </a>
+    <a data-delta-trigger="text" href="sms:+18065550140" aria-label="Text us"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">chat</span><span data-delta="ui.mobileCTA.textLabel">TEXT</span>
+    </a>
+    <button data-delta-trigger="location" aria-label="Share location"
+       class="flex flex-col items-center justify-center text-white w-full h-full font-bold text-xs uppercase tracking-wider hover:bg-cta">
+      <span class="material-symbols-outlined mb-1">location_on</span><span data-delta="ui.mobileCTA.locationLabel">LOCATION</span>
+    </button>
+  </nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="delta-engine.js"></script>
+  <script>
+    (async function () {
+      try {
+        const c = await DeltaEngine.loadContent();
+        DeltaEngine.applyTheme(c);
+        DeltaEngine.bootstrapTheme();
+        DeltaEngine.bindThemeToggle();
+        DeltaEngine.injectSEO(c);
+        DeltaEngine.applyStaticFields(c);
+        DeltaEngine.renderNavItems(c);
+        document.title = 'Transparent Flat-Rate Pricing | ' + (c.brand || '');
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.content = 'Flat-rate pricing for towing, roadside assistance, mobile mechanic, and truck repair. No memberships, no hidden fees. Quoted before we start. Call ' + (c.phoneDisplay || '') + '.';
+        // Build pricing tables
+        const cats = c.serviceCategories || [];
+        const svcs = c.services || [];
+        const pricingRoot = document.getElementById('pricing-root');
+        if (pricingRoot) {
+          pricingRoot.innerHTML = cats.map(cat => {
+            const catSvcs = svcs.filter(s => s.parentCategory === cat.id && s.pricing && s.pricing.length);
+            if (!catSvcs.length) return '';
+            return `<div class="bg-surface-container border border-outline/20 rounded-2xl p-6" data-aos="fade-up">
+              <div class="flex items-center gap-3 mb-6">
+                <span class="material-symbols-outlined text-cta text-3xl">${DeltaEngine.escHtml(cat.icon)}</span>
+                <h2 class="font-manrope font-black text-2xl text-on-background">${DeltaEngine.escHtml(cat.label)}</h2>
+              </div>
+              ${catSvcs.map(sv => `
+                <div class="mb-6 last:mb-0">
+                  <div class="font-semibold text-on-background mb-2 text-sm uppercase tracking-wide border-b border-outline/20 pb-2">${DeltaEngine.escHtml(sv.title)}</div>
+                  <div class="divide-y divide-outline/20">
+                    ${sv.pricing.map(p => `
+                      <div class="flex items-center justify-between py-2 text-sm">
+                        <span class="text-on-surface-variant">${DeltaEngine.escHtml(p.label)}</span>
+                        <div class="text-right">
+                          <span class="font-manrope font-black text-on-background">${DeltaEngine.escHtml(p.price)}</span>
+                          ${p.note ? `<span class="text-xs text-on-surface-variant ml-2">${DeltaEngine.escHtml(p.note)}</span>` : ''}
+                        </div>
+                      </div>`).join('')}
+                  </div>
+                </div>`).join('')}
+              <a href="tel:${DeltaEngine.escHtml(c.phone || '')}" data-delta-trigger="call"
+                 class="mt-4 inline-flex items-center gap-2 bg-cta hover:bg-cta-hover text-white font-bold px-4 py-2 rounded text-sm transition-colors">
+                <span class="material-symbols-outlined text-sm">call</span>Call for Quote
+              </a>
+            </div>`;
+          }).join('');
+        }
+        // FAQ accordion
+        document.querySelectorAll('[data-faq-trigger]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const panel = btn.nextElementSibling;
+            const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+            document.querySelectorAll('[data-faq-panel]').forEach(p => { p.style.maxHeight = ''; });
+            if (!isOpen) panel.style.maxHeight = panel.scrollHeight + 'px';
+          });
+        });
+        // Footer
+        const footerEl = document.getElementById('delta-footer');
+        if (footerEl) footerEl.innerHTML = DeltaEngine.renderFooter(c);
+        DeltaEngine.applyUIStrings(c);
+        DeltaEngine.bindMobileCTABar(c);
+        DeltaEngine.bindGSAPAnimations(c);
+        DeltaEngine.bindMagneticButtons();
+        if (window.AOS) AOS.init({ once: true, duration: 600 });
+      } catch (err) {
+        console.error('[pricing.html] boot failed:', err);
+      }
+    })();
+  </script>
+</body>
+</html>

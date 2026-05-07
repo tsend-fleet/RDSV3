@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Visual Editor</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"></noscript>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background:#0b1220; color:#e2e8f0; margin:0; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500; vertical-align: middle; }
+    #ve-canvas { transition: width 0.3s ease, max-width 0.3s ease; }
+    #ve-iframe { transition: width 0.3s ease; }
+    .tool-btn { display:flex; align-items:center; gap:8px; height:38px; padding:0 12px; background:#1e293b; border:1px solid #334155; color:#e2e8f0; border-radius:6px; font-size:13px; cursor:pointer; transition: all 0.15s; }
+    .tool-btn:hover { background:#334155; border-color:#475569; }
+    .tool-btn .material-symbols-outlined { font-size:18px; }
+    .field-label { display:block; font-size:11px; font-weight:600; color:#94a3b8; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.04em; }
+    .field-input { width:100%; height:38px; background:#020617; border:1px solid #1e293b; border-radius:6px; padding:0 10px; color:#e2e8f0; font-size:13px; }
+    textarea.field-input { height:auto; padding:8px 10px; min-height:80px; resize:vertical; font-family:inherit; }
+  </style>
+</head>
+<body>
+
+<!-- Login overlay -->
+<div id="login-overlay" class="fixed inset-0 z-[200] bg-slate-950 flex items-center justify-center p-4">
+  <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 max-w-sm w-full">
+    <div class="flex items-center gap-2 mb-6">
+      <span class="material-symbols-outlined text-red-500 text-3xl">design_services</span>
+      <span class="font-manrope font-black text-xl text-white">Visual Editor</span>
+    </div>
+    <label class="field-label">Password</label>
+    <input id="login-pwd" type="password" class="field-input" placeholder="Enter admin password">
+    <button id="login-btn" class="mt-4 w-full h-11 bg-red-600 hover:bg-red-500 text-white font-bold rounded">Unlock</button>
+    <p id="login-error" class="text-red-400 text-xs mt-3 hidden">Wrong password.</p>
+  </div>
+</div>
+
+<!-- Topbar (52px) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 h-[52px] flex items-center px-4 gap-3">
+  <div class="flex items-center gap-2 mr-auto">
+    <span class="material-symbols-outlined text-red-500">design_services</span>
+    <span class="font-manrope font-black text-white text-sm">Visual Editor</span>
+    <span class="text-xs text-slate-500 hidden md:inline">/ Panhandle 24/7</span>
+  </div>
+
+  <!-- Device switcher -->
+  <div class="hidden md:flex items-center bg-slate-800 rounded p-1 gap-1">
+    <button data-ve-device="desktop" class="ve-dev-btn h-7 px-3 text-xs text-slate-200 rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">desktop_windows</span>Desktop</button>
+    <button data-ve-device="tablet"  class="ve-dev-btn h-7 px-3 text-xs text-slate-200 rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">tablet</span>Tablet</button>
+    <button data-ve-device="mobile"  class="ve-dev-btn h-7 px-3 text-xs text-slate-200 rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">smartphone</span>Mobile</button>
+  </div>
+
+  <button id="token-toggle" class="h-9 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded inline-flex items-center gap-1"><span class="material-symbols-outlined text-base">key</span><span class="hidden md:inline">Token</span></button>
+  <button id="publish-btn" class="h-9 px-4 bg-slate-800 text-xs font-bold text-slate-400 rounded inline-flex items-center gap-1 cursor-not-allowed" disabled><span class="material-symbols-outlined text-base">cloud_upload</span>Publish Changes</button>
+</header>
+
+<!-- Token strip (collapsible) -->
+<div id="token-strip" class="fixed top-[52px] left-0 w-full z-40 bg-slate-900 border-b border-slate-800 px-4 py-3 hidden">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 items-end">
+    <div>
+      <label class="field-label">Repo Path (owner/repo)</label>
+      <input id="ve-repo" class="field-input" placeholder="e.g. tsend-fleet/AmarilloRDS">
+    </div>
+    <div>
+      <label class="field-label">Fine-Grained PAT</label>
+      <input id="ve-token" type="password" class="field-input" placeholder="github_pat_…">
+    </div>
+    <div class="md:col-span-2 flex flex-wrap gap-2">
+      <button id="ve-creds-save" class="h-9 px-3 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded inline-flex items-center gap-1">Save Credentials</button>
+      <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" class="h-9 px-3 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded inline-flex items-center gap-1">Generate Token →</a>
+      <span class="text-xs text-slate-400 self-center">Scope: Repository → Contents → Read and Write</span>
+    </div>
+  </div>
+</div>
+
+<!-- Body: Sidebar + Canvas -->
+<div class="flex pt-[52px] h-screen">
+  <!-- Sidebar 220px -->
+  <aside class="w-[220px] border-r border-slate-800 bg-slate-900 overflow-y-auto p-3 flex flex-col gap-4 shrink-0">
+    <div>
+      <div class="text-[10px] uppercase tracking-wider font-bold text-slate-500 mb-2 px-1">Edit Page</div>
+      <select id="ve-page-selector" class="field-input mb-2">
+        <option value="index.html">Homepage</option>
+        <option value="services.html">Services Directory</option>
+        <option value="service.html?id=flat-tire-repair">Service Detail (sample)</option>
+        <option value="service-area.html">Service Area</option>
+        <option value="pricing.html">Pricing</option>
+        <option value="fleet.html">Fleet</option>
+        <option value="contact.html">Contact</option>
+      </select>
+    </div>
+
+    <div>
+      <div class="text-[10px] uppercase tracking-wider font-bold text-slate-500 mb-2 px-1">Jump to Section</div>
+      <div class="grid gap-1">
+        <button data-ve-jump="hero"     class="tool-btn"><span class="material-symbols-outlined">flag</span>Hero</button>
+        <button data-ve-jump="services" class="tool-btn"><span class="material-symbols-outlined">grid_view</span>Services</button>
+        <button data-ve-jump="reviews"  class="tool-btn"><span class="material-symbols-outlined">reviews</span>Reviews</button>
+        <button data-ve-jump="fleet"    class="tool-btn"><span class="material-symbols-outlined">business_center</span>Fleet</button>
+        <button data-ve-jump="contact"  class="tool-btn"><span class="material-symbols-outlined">mail</span>Contact</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="text-[10px] uppercase tracking-wider font-bold text-slate-500 mb-2 px-1">Quick Edit</div>
+      <div class="grid gap-2">
+        <div><label class="field-label">Brand</label><input id="qe-brand" class="field-input"></div>
+        <div><label class="field-label">Announcement</label><input id="qe-announcement" class="field-input"></div>
+        <div><label class="field-label">Phone Display</label><input id="qe-phoneDisplay" class="field-input"></div>
+        <div><label class="field-label">Phone (E.164)</label><input id="qe-phone" class="field-input"></div>
+        <div><label class="field-label">Email</label><input id="qe-email" class="field-input"></div>
+        <div><label class="field-label">ETA Minutes</label><input id="qe-eta" class="field-input"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="text-[10px] uppercase tracking-wider font-bold text-slate-500 mb-2 px-1">Tools</div>
+      <div class="grid gap-1">
+        <button id="t-reload"     class="tool-btn"><span class="material-symbols-outlined">refresh</span>Reload Content</button>
+        <button id="t-popup"      class="tool-btn"><span class="material-symbols-outlined">campaign</span>Toggle Popup</button>
+        <button id="t-theme"      class="tool-btn"><span class="material-symbols-outlined">contrast</span>◐ Toggle Light/Dark</button>
+        <button id="t-seo-audit"  class="tool-btn"><span class="material-symbols-outlined">analytics</span>Run SEO Audit</button>
+        <a href="admin.html" class="tool-btn no-underline"><span class="material-symbols-outlined">tune</span>Open Full Admin</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Canvas -->
+  <main id="ve-canvas" class="flex-1 bg-slate-950 flex justify-center p-4 overflow-auto">
+    <iframe id="ve-iframe" src="index.html" class="bg-white shadow-2xl" style="width:100%; height:100%; border:0; border-radius:8px"></iframe>
+  </main>
+</div>
+
+<!-- Edit Panel (slides from right) -->
+<aside id="ve-edit-panel" class="fixed top-[52px] right-0 h-[calc(100vh-52px)] w-[340px] bg-slate-900 border-l border-slate-800 z-40 transform translate-x-full transition-transform overflow-y-auto p-4">
+  <div class="flex items-center justify-between mb-4">
+    <div class="font-manrope font-black text-white">Edit Element</div>
+    <button id="ve-panel-close" class="h-8 w-8 rounded hover:bg-slate-800 inline-flex items-center justify-center text-slate-400">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+  <div id="ve-panel-key" class="text-xs text-emerald-400 font-mono mb-1"></div>
+  <label id="ve-panel-label" class="field-label"></label>
+  <div id="ve-panel-input"></div>
+  <div id="ve-panel-preview" class="mt-3 hidden">
+    <div class="field-label">Preview</div>
+    <div id="ve-preview-img" class="aspect-video rounded bg-slate-950 border border-slate-800 overflow-hidden"></div>
+  </div>
+  <div class="flex gap-2 mt-5">
+    <button id="ve-panel-apply" class="flex-1 h-10 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded text-sm">Apply</button>
+    <button id="ve-panel-cancel" class="h-10 px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-sm">Cancel</button>
+  </div>
+
+  <details class="mt-6 bg-slate-950 rounded p-3 border border-slate-800">
+    <summary class="font-bold text-emerald-400 text-xs uppercase tracking-wider cursor-pointer">Element Style</summary>
+    <div class="mt-3 grid gap-2">
+      <div><label class="field-label">Font Size (px)</label><input id="es-size" type="number" class="field-input"></div>
+      <div><label class="field-label">Line Height</label><input id="es-line" class="field-input" placeholder="1.2"></div>
+      <div><label class="field-label">Letter Spacing</label><input id="es-letter" class="field-input" placeholder="-0.01em"></div>
+      <div><label class="field-label">Text Color (hex)</label><input id="es-color" type="color" class="field-input h-10"></div>
+      <div>
+        <label class="field-label">Alignment</label>
+        <div class="flex gap-1">
+          <button data-es-align="left"   class="es-align tool-btn flex-1 justify-center">Left</button>
+          <button data-es-align="center" class="es-align tool-btn flex-1 justify-center">Center</button>
+          <button data-es-align="right"  class="es-align tool-btn flex-1 justify-center">Right</button>
+        </div>
+      </div>
+      <button id="es-reset" class="tool-btn justify-center">Reset to Theme Default</button>
+    </div>
+  </details>
+</aside>
+
+<!-- SEO audit panel -->
+<aside id="ve-audit-panel" class="fixed top-[52px] right-0 h-[calc(100vh-52px)] w-[420px] bg-slate-900 border-l border-slate-800 z-40 transform translate-x-full transition-transform overflow-y-auto p-4 hidden">
+  <div class="flex items-center justify-between mb-4">
+    <div class="font-manrope font-black text-white">Keyword Coverage Audit</div>
+    <button id="audit-close" class="h-8 w-8 rounded hover:bg-slate-800 inline-flex items-center justify-center text-slate-400"><span class="material-symbols-outlined">close</span></button>
+  </div>
+  <div id="audit-body" class="text-sm text-slate-300"></div>
+</aside>
+
+<script src="delta-engine.js"></script>
+<script>
+'use strict';
+const ADMIN_PASSWORD = 'RDSIDE123';
+let DATA = null;
+let DIRTY = false;
+let SELECTED = null;
+
+// ── Login gate ───────────────────────────────────────────────────────
+function unlock() { document.getElementById('login-overlay').style.display='none'; sessionStorage.setItem('delta_ve_unlocked','1'); boot(); }
+document.getElementById('login-btn').addEventListener('click', () => {
+  const pwd = document.getElementById('login-pwd').value;
+  if (pwd === ADMIN_PASSWORD) unlock();
+  else document.getElementById('login-error').classList.remove('hidden');
+});
+document.getElementById('login-pwd').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('login-btn').click(); });
+if (sessionStorage.getItem('delta_ve_unlocked') === '1') unlock();
+
+// ── Token strip ──────────────────────────────────────────────────────
+const tokenStrip = document.getElementById('token-strip');
+document.getElementById('token-toggle').addEventListener('click', () => tokenStrip.classList.toggle('hidden'));
+const veToken = document.getElementById('ve-token'); const veRepo = document.getElementById('ve-repo');
+veToken.value = localStorage.getItem('delta_gh_token') || '';
+veRepo.value  = localStorage.getItem('delta_repo_path') || '';
+document.getElementById('ve-creds-save').addEventListener('click', () => {
+  localStorage.setItem('delta_gh_token',  veToken.value.trim());
+  localStorage.setItem('delta_repo_path', veRepo.value.trim());
+  DeltaEngine.toast('GitHub credentials saved', 'success');
+});
+
+// ── Device switcher ──────────────────────────────────────────────────
+const iframe = document.getElementById('ve-iframe');
+const canvas = document.getElementById('ve-canvas');
+const widths = { desktop: '100%', tablet: '768px', mobile: '375px' };
+document.querySelectorAll('.ve-dev-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    const dev = b.dataset.veDevice;
+    iframe.style.width = widths[dev];
+    iframe.style.maxWidth = widths[dev];
+    document.querySelectorAll('.ve-dev-btn').forEach(x => x.classList.remove('bg-slate-700'));
+    b.classList.add('bg-slate-700');
+  });
+});
+document.querySelector('[data-ve-device="desktop"]').classList.add('bg-slate-700');
+
+// ── Boot ─────────────────────────────────────────────────────────────
+async function boot() {
+  try {
+    DATA = await DeltaEngine.loadContent();
+    document.title = 'Visual Editor · ' + (DATA.brand || 'Visual Editor');
+    fillQuickEdit();
+  } catch (e) { DeltaEngine.toast('Failed to load content.json: ' + e.message, 'error'); }
+}
+function fillQuickEdit() {
+  if (!DATA) return;
+  document.getElementById('qe-brand').value        = DATA.brand || '';
+  document.getElementById('qe-announcement').value = DATA.announcement || '';
+  document.getElementById('qe-phoneDisplay').value = DATA.phoneDisplay || '';
+  document.getElementById('qe-phone').value        = DATA.phone || '';
+  document.getElementById('qe-email').value        = DATA.email || '';
+  document.getElementById('qe-eta').value          = (DATA.hero && DATA.hero.etaMinutes) || '';
+}
+
+function markDirty(d) {
+  DIRTY = !!d;
+  const btn = document.getElementById('publish-btn');
+  if (d) {
+    btn.classList.remove('bg-slate-800','text-slate-400','cursor-not-allowed');
+    btn.classList.add('bg-emerald-600','hover:bg-emerald-500','text-white');
+    btn.disabled = false;
+  } else {
+    btn.classList.add('bg-slate-800','text-slate-400','cursor-not-allowed');
+    btn.classList.remove('bg-emerald-600','hover:bg-emerald-500','text-white');
+    btn.disabled = true;
+  }
+}
+
+// ── Quick edit propagation ───────────────────────────────────────────
+function setPath(obj, path, val) {
+  const parts = path.split('.');
+  let cur = obj;
+  for (let i = 0; i < parts.length - 1; i++) {
+    if (cur[parts[i]] === undefined) cur[parts[i]] = {};
+    cur = cur[parts[i]];
+  }
+  cur[parts[parts.length - 1]] = val;
+}
+
+const QE_MAP = {
+  'qe-brand': 'brand',
+  'qe-announcement': 'announcement',
+  'qe-phoneDisplay': 'phoneDisplay',
+  'qe-phone': 'phone',
+  'qe-email': 'email',
+  'qe-eta': 'hero.etaMinutes'
+};
+Object.entries(QE_MAP).forEach(([id, path]) => {
+  document.getElementById(id).addEventListener('input', e => {
+    setPath(DATA, path, e.target.value);
+    propagateToIframe(path, e.target.value);
+    markDirty(true);
+  });
+});
+function propagateToIframe(path, val) {
+  const idoc = iframe.contentDocument; if (!idoc) return;
+  const els = idoc.querySelectorAll(`[data-delta="${path}"]`);
+  els.forEach(el => { el.textContent = val; });
+  if (path === 'phone' || path === 'phoneDisplay') {
+    const win = iframe.contentWindow;
+    if (win && win.DeltaEngine && DATA) win.DeltaEngine.bindMobileCTABar(DATA);
+  }
+}
+
+// ── Section jump (smooth scroll inside iframe) ───────────────────────
+document.querySelectorAll('[data-ve-jump]').forEach(b => {
+  b.addEventListener('click', () => {
+    const sec = b.dataset.veJump;
+    const idoc = iframe.contentDocument;
+    const target = idoc && (idoc.querySelector(`[data-section="${sec}"]`) || idoc.getElementById(sec));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ── Tools ────────────────────────────────────────────────────────────
+document.getElementById('ve-page-selector').addEventListener('change', e => {
+  iframe.src = e.target.value;
+});
+document.getElementById('t-reload').addEventListener('click', async () => {
+  iframe.src = iframe.src.split('?')[0] + '?ts=' + Date.now();
+  DATA = await DeltaEngine.loadContent();
+  fillQuickEdit();
+  markDirty(false);
+  DeltaEngine.toast('Reloaded fresh content', 'info');
+});
+document.getElementById('t-popup').addEventListener('click', () => {
+  if (!DATA.popup) DATA.popup = {};
+  DATA.popup.enabled = !DATA.popup.enabled;
+  markDirty(true);
+  DeltaEngine.toast('Popup ' + (DATA.popup.enabled ? 'ENABLED' : 'DISABLED'), 'info');
+});
+document.getElementById('t-theme').addEventListener('click', () => {
+  const win = iframe.contentWindow;
+  if (!win || !win.DeltaEngine) return;
+  const cur = win.DeltaEngine.getThemeMode();
+  win.DeltaEngine.setThemeMode(cur === 'light' ? 'dark' : 'light');
+});
+document.getElementById('t-seo-audit').addEventListener('click', runSEOAudit);
+
+function runSEOAudit() {
+  if (!DATA || !DATA.seo || !DATA.seo.keywordBank) return;
+  const idoc = iframe.contentDocument;
+  if (!idoc) return DeltaEngine.toast('Iframe not ready', 'error');
+  const visibleText = idoc.body.innerText.toLowerCase();
+  const headingText = [...idoc.querySelectorAll('h1,h2,h3')].map(h => h.innerText.toLowerCase()).join(' ');
+  const metaKw = (idoc.querySelector('meta[name="keywords"]') || {}).content || '';
+  const buckets = DATA.seo.keywordBank;
+  const report = {};
+  Object.keys(buckets).forEach(k => {
+    report[k] = (buckets[k] || []).map(kw => {
+      const lower = kw.toLowerCase();
+      const inHeading = headingText.includes(lower);
+      const inVisible = visibleText.includes(lower);
+      const inMeta    = metaKw.toLowerCase().includes(lower);
+      let status = '❌ unused';
+      if (inHeading) status = '✅ heading';
+      else if (inVisible) status = '✅ body';
+      else if (inMeta) status = '⚠️ meta only';
+      return { kw, status };
+    });
+  });
+  const html = Object.entries(report).map(([b, items]) => {
+    const unused = items.filter(i => i.status.startsWith('❌')).length;
+    const meta = items.filter(i => i.status.startsWith('⚠️')).length;
+    const used = items.length - unused - meta;
+    return `<details class="bg-slate-950 border border-slate-800 rounded p-3 mb-2" open>
+      <summary class="cursor-pointer font-semibold text-emerald-400 text-sm">${b} — ${used}/${items.length} used
+        ${unused ? `<span class="text-red-400 ml-2">${unused} unused</span>` : ''}
+        ${meta ? `<span class="text-yellow-400 ml-2">${meta} meta-only</span>` : ''}
+      </summary>
+      <ul class="mt-2 space-y-1 text-xs">
+        ${items.map(i => `<li class="flex justify-between gap-2"><span>${i.kw}</span><span>${i.status}</span></li>`).join('')}
+      </ul>
+    </details>`;
+  }).join('');
+  document.getElementById('audit-body').innerHTML = html;
+  document.getElementById('ve-edit-panel').classList.add('translate-x-full');
+  const ap = document.getElementById('ve-audit-panel');
+  ap.classList.remove('hidden'); requestAnimationFrame(() => ap.classList.remove('translate-x-full'));
+}
+document.getElementById('audit-close').addEventListener('click', () => {
+  const ap = document.getElementById('ve-audit-panel');
+  ap.classList.add('translate-x-full');
+  setTimeout(() => ap.classList.add('hidden'), 300);
+});
+
+// ── Click-to-edit injection (event delegation — works on ALL pages and dynamic elements) ─
+iframe.addEventListener('load', () => {
+  const idoc = iframe.contentDocument;
+  if (!idoc) return;
+  // Accept any page with data-delta-app (public, service, page, services, fleet, etc.)
+  const app = idoc.querySelector('[data-delta-app]');
+  if (!app) return;
+
+  // Inject hover/active styles
+  if (!idoc.getElementById('delta-ve-styles')) {
+    const style = idoc.createElement('style');
+    style.id = 'delta-ve-styles';
+    style.textContent = `
+      [data-delta] { cursor: pointer; outline: 2px dashed transparent; outline-offset: 2px; transition: outline 0.15s; }
+      [data-delta]:hover { outline-color: #f5a623; }
+      [data-delta].delta-ve-active { outline: 2px solid #10b981; outline-offset: 2px; }
+    `;
+    idoc.head.appendChild(style);
+  }
+
+  // Event delegation — single listener catches clicks on dynamically rendered elements too
+  idoc.addEventListener('click', e => {
+    const el = e.target.closest('[data-delta]');
+    if (!el) return;
+    const key = el.getAttribute('data-delta');
+    if (!key) return;
+    // Skip container-only keys (lists, maps) but allow everything else including nav.*
+    if (/\.(list|grid|map|desktop|mobile)$/.test(key)) return;
+    e.preventDefault(); e.stopPropagation();
+    selectElement(el, key);
+  }, true);
+});
+
+function detectInputType(key) {
+  if (/image|img|map/.test(key)) return 'url';
+  if (/title|subtitle|p1|p2|bio|desc|longDesc|content|tagline/.test(key)) return 'textarea';
+  return 'text';
+}
+function getDataValueByKey(key) {
+  return key.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : '', DATA);
+}
+function selectElement(el, key) {
+  const idoc = iframe.contentDocument;
+  idoc.querySelectorAll('.delta-ve-active').forEach(x => x.classList.remove('delta-ve-active'));
+  el.classList.add('delta-ve-active');
+  SELECTED = { el, key };
+  const type = detectInputType(key);
+  const val = getDataValueByKey(key);
+  document.getElementById('ve-panel-key').textContent = key;
+  document.getElementById('ve-panel-label').textContent = key.split('.').pop();
+  const inputHost = document.getElementById('ve-panel-input');
+  if (type === 'textarea') {
+    inputHost.innerHTML = `<textarea id="ve-input" class="field-input" rows="5">${(val || '').replace(/</g,'&lt;')}</textarea>`;
+  } else if (type === 'url') {
+    inputHost.innerHTML = `<input id="ve-input" type="url" class="field-input" value="${(val||'').replace(/"/g,'&quot;')}">`;
+    document.getElementById('ve-panel-preview').classList.remove('hidden');
+    updatePreview(val);
+    document.getElementById('ve-input').addEventListener('input', e => updatePreview(e.target.value));
+  } else {
+    inputHost.innerHTML = `<input id="ve-input" type="text" class="field-input" value="${(val||'').replace(/"/g,'&quot;')}">`;
+    document.getElementById('ve-panel-preview').classList.add('hidden');
+  }
+  // load element style fields
+  const styles = (DATA.elementStyles && DATA.elementStyles[key]) || {};
+  document.getElementById('es-size').value   = styles.fontSize ? parseInt(styles.fontSize, 10) : '';
+  document.getElementById('es-line').value   = styles.lineHeight || '';
+  document.getElementById('es-letter').value = styles.letterSpacing || '';
+  document.getElementById('es-color').value  = styles.color || '#000000';
+
+  document.getElementById('ve-edit-panel').classList.remove('translate-x-full');
+}
+function updatePreview(url) {
+  const host = document.getElementById('ve-preview-img');
+  host.innerHTML = `<img src="${(url||'').replace(/"/g,'&quot;')}" alt="" class="w-full h-full object-cover" onerror="this.style.opacity=0.3">`;
+}
+
+document.getElementById('ve-panel-close').addEventListener('click', closePanel);
+document.getElementById('ve-panel-cancel').addEventListener('click', closePanel);
+function closePanel() {
+  document.getElementById('ve-edit-panel').classList.add('translate-x-full');
+  if (SELECTED) SELECTED.el.classList.remove('delta-ve-active');
+  SELECTED = null;
+}
+document.getElementById('ve-panel-apply').addEventListener('click', () => {
+  if (!SELECTED) return;
+  const v = document.getElementById('ve-input').value;
+  setPath(DATA, SELECTED.key, v);
+  // Update iframe DOM
+  if (/image|img/.test(SELECTED.key)) {
+    const img = SELECTED.el.tagName === 'IMG' ? SELECTED.el : SELECTED.el.querySelector('img');
+    if (img) img.src = v;
+  } else {
+    SELECTED.el.textContent = v;
+  }
+  // Apply element styles
+  applyElementStyleEdits();
+  fillQuickEdit();
+  markDirty(true);
+  closePanel();
+});
+
+function applyElementStyleEdits() {
+  if (!SELECTED) return;
+  const key = SELECTED.key;
+  if (!DATA.elementStyles) DATA.elementStyles = {};
+  const styles = DATA.elementStyles[key] = DATA.elementStyles[key] || {};
+  const size = document.getElementById('es-size').value;
+  const line = document.getElementById('es-line').value;
+  const ltr  = document.getElementById('es-letter').value;
+  const col  = document.getElementById('es-color').value;
+  if (size) { styles.fontSize = size + 'px'; SELECTED.el.style.fontSize = styles.fontSize; }
+  if (line) { styles.lineHeight = line; SELECTED.el.style.lineHeight = line; }
+  if (ltr)  { styles.letterSpacing = ltr; SELECTED.el.style.letterSpacing = ltr; }
+  if (col)  { styles.color = col; SELECTED.el.style.color = col; }
+}
+
+document.querySelectorAll('.es-align').forEach(b => {
+  b.addEventListener('click', () => {
+    if (!SELECTED) return;
+    const align = b.dataset.esAlign;
+    SELECTED.el.style.textAlign = align;
+    if (!DATA.elementStyles) DATA.elementStyles = {};
+    DATA.elementStyles[SELECTED.key] = DATA.elementStyles[SELECTED.key] || {};
+    DATA.elementStyles[SELECTED.key].textAlign = align;
+    markDirty(true);
+  });
+});
+document.getElementById('es-reset').addEventListener('click', () => {
+  if (!SELECTED) return;
+  SELECTED.el.removeAttribute('style');
+  if (DATA.elementStyles && DATA.elementStyles[SELECTED.key]) delete DATA.elementStyles[SELECTED.key];
+  markDirty(true);
+});
+
+// ── Publish ──────────────────────────────────────────────────────────
+document.getElementById('publish-btn').addEventListener('click', async () => {
+  if (!DIRTY) return;
+  const token = localStorage.getItem('delta_gh_token');
+  const repo  = localStorage.getItem('delta_repo_path');
+  if (!token || !repo) { DeltaEngine.toast('Set GitHub PAT and Repo Path first (Token button)', 'error'); return; }
+  const btn = document.getElementById('publish-btn');
+  const orig = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined text-base">sync</span>Publishing…';
+  try {
+    await DeltaEngine.commitContent(token, repo, DATA, 'Update from visual editor');
+    DeltaEngine.toast('Published successfully', 'success');
+    markDirty(false);
+  } catch (e) {
+    DeltaEngine.toast('Publish failed: ' + e.message, 'error');
+    markDirty(true);
+  } finally {
+    btn.innerHTML = orig;
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,797 @@
+{
+  "brand": "Panhandle 24/7 Roadside",
+  "tagline": "24/7 Roadside Assistance, Mobile Mechanic & Heavy-Duty Towing across Amarillo & the Texas Panhandle.",
+  "phone": "+18065550140",
+  "phoneDisplay": "(806) 555-0140",
+  "whatsapp": "+18065550140",
+  "email": "dispatch@panhandle247roadside.com",
+  "address": "4500 I-40 Access Rd, Amarillo, TX 79103",
+  "hoursWeekday": "24/7 Dispatch",
+  "hoursWeekend": "24/7 Dispatch",
+  "dispatchNote": "Average dispatch in 22 minutes — Hablamos Español",
+  "announcement": "🚨 LIVE DISPATCH 24/7 — Avg ETA 22 min on I-40 — Call (806) 555-0140",
+
+  "stats": {
+    "dispatches": "2,400+",
+    "responseTime": "22 min avg",
+    "yearsServing": "12+",
+    "citiesServed": "40+",
+    "rating": "4.9 ★"
+  },
+
+  "trustBadges": [
+    { "icon": "verified",       "label": "Licensed & Insured", "sublabel": "Fully bonded TX DOT" },
+    { "icon": "local_shipping", "label": "USDOT Certified",    "sublabel": "DOT# 4262689" },
+    { "icon": "schedule",       "label": "24/7 Dispatch",      "sublabel": "Always answered" },
+    { "icon": "handshake",      "label": "Locally Owned",      "sublabel": "Texas Panhandle" },
+    { "icon": "price_check",    "label": "No Hidden Fees",     "sublabel": "Flat-rate pricing" },
+    { "icon": "location_on",    "label": "GPS Tracked",        "sublabel": "Real-time arrival" }
+  ],
+
+  "nav": [
+    { "label": "Services",     "href": "services.html" },
+    { "label": "Service Area", "href": "service-area.html" },
+    { "label": "Pricing",      "href": "pricing.html" },
+    { "label": "Fleet",        "href": "fleet.html" },
+    { "label": "Reviews",      "href": "index.html#reviews" },
+    { "label": "Contact",      "href": "contact.html" }
+  ],
+
+  "hero": {
+    "title": "Stuck on I-40? We're 22 Minutes Away.",
+    "subtitle": "24/7 Roadside Assistance, Mobile Mechanic & Heavy-Duty Towing across Amarillo, the Texas Panhandle, and the I-40 corridor.",
+    "etaLabel": "Current dispatch ETA",
+    "etaMinutes": "22",
+    "cta1Label": "🚨 CALL NOW",
+    "cta1Href":  "tel:+18065550140",
+    "cta2Label": "GET INSTANT QUOTE",
+    "cta2Href":  "page.html?id=contact",
+    "image": "hero.webp"
+  },
+
+  "serviceCategories": [
+    { "id": "roadside",   "label": "Roadside Assistance",   "icon": "emergency",       "hubPageId": "roadside-hub", "accentColor": "cta" },
+    { "id": "towing",     "label": "Towing Services",       "icon": "local_shipping",  "hubPageId": "towing-hub",   "accentColor": "secondary" },
+    { "id": "truck",      "label": "Truck & Diesel Repair", "icon": "build",           "hubPageId": "truck-repair", "accentColor": "accent" },
+    { "id": "commercial", "label": "Fleet & Commercial",    "icon": "business_center", "hubPageId": "fleet",        "accentColor": "tertiary" }
+  ],
+
+  "services": [
+    {
+      "id": "flat-tire-repair", "category": "Roadside", "parentCategory": "roadside", "isHub": false,
+      "icon": "tire_repair", "title": "Flat Tire Change & Repair",
+      "shortDesc": "Fast tire change or plug service anywhere on I-40, I-27, or in Amarillo.",
+      "longDesc": "Need a flat tire change in Amarillo, TX? Our roadside techs reach you in under 30 minutes with the right jack, tools, and patches. Licensed and insured, USDOT certified, Hablamos Español. Flat-rate pricing — no hidden fees on the highway. We work passenger vehicles, RVs, and light commercial trucks 24/7.",
+      "pricing": [
+        { "label": "Passenger Vehicle", "price": "$75",  "note": "flat rate, on-site" },
+        { "label": "Light Truck / SUV", "price": "$95",  "note": "flat rate, on-site" },
+        { "label": "RV / Class A",      "price": "$165", "note": "with proper jack" }
+      ],
+      "faq": [
+        { "q": "How long does it take?", "a": "Typically 20–30 minutes on-site once we arrive." },
+        { "q": "Do I need to have a spare?", "a": "If you have one, we'll mount it. If not, we can plug or swap depending on damage." },
+        { "q": "Do you do trailer tires?", "a": "Yes — light trailer tires included. Heavy-duty trailer tires fall under truck repair pricing." }
+      ],
+      "badge": "Most Requested", "image": "https://images.unsplash.com/photo-1486496572940-2bb2341fdbdf?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["jump-start", "winch-out", "fuel-delivery"]
+    },
+    {
+      "id": "jump-start", "category": "Roadside", "parentCategory": "roadside", "isHub": false,
+      "icon": "battery_charging_full", "title": "Battery Jump Start",
+      "shortDesc": "Dead battery? On-site jump or battery swap, anywhere in the Texas Panhandle.",
+      "longDesc": "Dead battery jumpstart near you in Amarillo, TX. Average response under 25 minutes. We bring commercial-grade jump packs, can test your alternator on the spot, and carry replacement batteries for most makes. Licensed and insured. Hablamos Español. Flat-rate pricing.",
+      "pricing": [
+        { "label": "Standard Jump Start", "price": "$65", "note": "flat rate" },
+        { "label": "Battery Swap",        "price": "$185+", "note": "battery cost included" }
+      ],
+      "faq": [
+        { "q": "Will a jump always work?", "a": "If the battery is bad, no — but we can swap on the spot." },
+        { "q": "Do you carry batteries?",  "a": "Yes, common GM/Ford/Toyota/Honda sizes are on the truck." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1568106089833-ec51e8a96e76?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["fuel-delivery", "car-lockout", "flat-tire-repair"]
+    },
+    {
+      "id": "car-lockout", "category": "Roadside", "parentCategory": "roadside", "isHub": false,
+      "icon": "key", "title": "Car Lockout Service",
+      "shortDesc": "Locked keys in the car? Non-damaging entry, no membership needed.",
+      "longDesc": "Locked out of car in Amarillo? Our techs use professional non-damaging entry tools — slim jims, air wedges, lockout kits. We handle key fob programming and push-button start vehicles. Average arrival under 25 minutes. Hablamos Español, no membership required.",
+      "pricing": [
+        { "label": "Standard Lockout", "price": "$75", "note": "flat rate" },
+        { "label": "High-Security",    "price": "$125", "note": "smart key / fob" }
+      ],
+      "faq": [
+        { "q": "Will you damage my door?", "a": "No — we use professional non-damaging entry tools." },
+        { "q": "Do you do key fob programming?", "a": "Yes, on most modern makes." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1583836631365-ec5d89c4a4f5?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["jump-start", "fuel-delivery", "flat-tire-repair"]
+    },
+    {
+      "id": "fuel-delivery", "category": "Roadside", "parentCategory": "roadside", "isHub": false,
+      "icon": "local_gas_station", "title": "Fuel Delivery",
+      "shortDesc": "Ran out of gas? Up to 5 gallons brought to you anywhere on I-40.",
+      "longDesc": "Ran out of gas on I-40 in the Texas Panhandle? We deliver gasoline or diesel directly to your vehicle, anywhere in our service area. Flat-rate dispatch fee + cost of fuel. No membership needed. Hablamos Español.",
+      "pricing": [
+        { "label": "Gasoline (up to 5 gal)", "price": "$55 + fuel", "note": "flat dispatch" },
+        { "label": "Diesel (up to 5 gal)",   "price": "$65 + fuel", "note": "flat dispatch" }
+      ],
+      "faq": [
+        { "q": "How much fuel do you bring?", "a": "Up to 5 gallons — enough to get you to the next station." },
+        { "q": "Do you do diesel?", "a": "Yes — gasoline and diesel both." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1545459720-aac8509eb02c?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["jump-start", "flat-tire-repair", "winch-out"]
+    },
+    {
+      "id": "winch-out", "category": "Roadside", "parentCategory": "roadside", "isHub": false,
+      "icon": "settings_suggest", "title": "Winch-Out & Recovery",
+      "shortDesc": "Stuck in mud, snow, or a ditch? On-site winch-out, no damage.",
+      "longDesc": "Stuck in mud, snow, sand, or off the highway? Our winch trucks run heavy-duty cable rated for cars, light trucks, and trailers. Recovery without damaging your suspension or undercarriage. 24/7 dispatch across the Texas Panhandle.",
+      "pricing": [
+        { "label": "Light Vehicle Winch-Out", "price": "$125", "note": "single line pull" },
+        { "label": "Trailer / Heavy",         "price": "$225+", "note": "multi-line / heavy" }
+      ],
+      "faq": [
+        { "q": "Will you damage my vehicle?", "a": "No — we use rated straps and pull from factory recovery points." },
+        { "q": "Do you handle off-road recoveries?", "a": "Yes, when safe to access. Heavy off-road may need our rotator." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1597007030739-6d2e7172ee6b?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["light-duty-towing", "flat-tire-repair", "heavy-duty-towing"]
+    },
+    {
+      "id": "light-duty-towing", "category": "Towing", "parentCategory": "towing", "isHub": false,
+      "icon": "local_shipping", "title": "Light-Duty Towing",
+      "shortDesc": "Cars, SUVs & light trucks. Flatbed available, GPS-tracked dispatch.",
+      "longDesc": "24/7 light-duty towing in Amarillo and across the Texas Panhandle. We tow passenger cars, SUVs, and light pickups on flatbed or wheel-lift. Licensed and insured, GPS-tracked. Flat-rate pricing per mile, no hidden fees.",
+      "pricing": [
+        { "label": "Hookup (within 5 mi)", "price": "$95",  "note": "flat hookup fee" },
+        { "label": "Per-Mile (after 5 mi)","price": "$3.50", "note": "per loaded mile" },
+        { "label": "Flatbed Upgrade",      "price": "+$35", "note": "all-wheel-drive / luxury" }
+      ],
+      "faq": [
+        { "q": "Do you do flatbed?",       "a": "Yes — recommended for AWD and luxury vehicles." },
+        { "q": "What's your service radius?", "a": "100 miles around Amarillo, including Tucumcari NM." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1566936737687-8f392a237b8b?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["heavy-duty-towing", "long-distance-towing", "winch-out"]
+    },
+    {
+      "id": "heavy-duty-towing", "category": "Towing", "parentCategory": "towing", "isHub": false,
+      "icon": "fire_truck", "title": "Heavy-Duty Towing",
+      "shortDesc": "Semi trucks, RVs, buses, box trucks. 75-ton rotator service available.",
+      "longDesc": "Heavy-duty towing Amarillo TX — semi trucks, tractor-trailers, RVs, buses, and large box trucks on the I-40 corridor. We operate a 75-ton rotator for accident recovery, jackknife, and rollover. USDOT certified, fully bonded.",
+      "pricing": [
+        { "label": "Heavy Hookup",     "price": "$385", "note": "semi / Class 8" },
+        { "label": "Per-Mile (loaded)","price": "$8.50", "note": "per loaded mile" },
+        { "label": "Rotator Service",  "price": "Quote", "note": "accident recovery" }
+      ],
+      "faq": [
+        { "q": "Do you handle jackknife recoveries?", "a": "Yes — 75-ton rotator on standby for I-40 accidents." },
+        { "q": "Do you direct-bill insurance?",       "a": "Yes — most major commercial carriers." }
+      ],
+      "badge": "Heavy-Duty", "image": "https://images.unsplash.com/photo-1549921296-3a6b4c0e0a3a?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["light-duty-towing", "long-distance-towing", "semi-truck-repair"]
+    },
+    {
+      "id": "long-distance-towing", "category": "Towing", "parentCategory": "towing", "isHub": false,
+      "icon": "route", "title": "Long-Distance Towing",
+      "shortDesc": "Out-of-state and cross-Texas tows. Quoted flat rate, GPS tracked.",
+      "longDesc": "Long-distance towing from Amarillo to anywhere in TX, NM, OK, KS, or CO. Quoted flat rate up front — no surprise per-mile bills. GPS-tracked, fully bonded, signed bill of lading.",
+      "pricing": [
+        { "label": "Quoted Per Trip", "price": "Quote", "note": "based on miles + vehicle class" }
+      ],
+      "faq": [
+        { "q": "How far will you tow?", "a": "Anywhere in the lower 48 if quoted ahead." },
+        { "q": "Do you do classic / luxury cars?", "a": "Yes — enclosed transport on request." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["light-duty-towing", "heavy-duty-towing"]
+    },
+    {
+      "id": "semi-truck-repair", "category": "Truck", "parentCategory": "truck", "isHub": false,
+      "icon": "build", "title": "Semi Truck Repair (On-Site)",
+      "shortDesc": "Mobile diesel mechanic for tractor-trailers anywhere on I-40.",
+      "longDesc": "Semi truck repair Amarillo Texas — mobile diesel mechanic dispatched to your breakdown location on I-40, I-27, or US-87. We carry common parts for Cummins, Detroit, Volvo, Cat, and Paccar. ASE certified, USDOT compliant. Air brake repair, DPF regen, DEF problems, alternator, starter, and fuel system on-road.",
+      "pricing": [
+        { "label": "Mobile Service Call", "price": "$185", "note": "first hour, on-site" },
+        { "label": "Hourly Labor (after)","price": "$145/hr", "note": "diagnostic + repair" },
+        { "label": "Parts",               "price": "Cost+",  "note": "no markup games" }
+      ],
+      "faq": [
+        { "q": "What engines do you work on?", "a": "Cummins, Detroit, Volvo, Cat, Paccar — most Class 8 platforms." },
+        { "q": "Do you do DPF regen on the road?", "a": "Yes — forced regen and parametric resets on-site." }
+      ],
+      "badge": "I-40 Specialist", "image": "https://images.unsplash.com/photo-1612358405968-95c2b1d77ce0?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["mobile-diesel-mechanic", "air-brake-repair", "dpf-regen"]
+    },
+    {
+      "id": "mobile-diesel-mechanic", "category": "Truck", "parentCategory": "truck", "isHub": false,
+      "icon": "engineering", "title": "Mobile Diesel Mechanic",
+      "shortDesc": "ASE-certified diesel tech, on the road in under 1 hour anywhere on I-40.",
+      "longDesc": "Mobile diesel mechanic Amarillo serving the entire Texas Panhandle and I-40 corridor. We come to your truck, RV, or fleet — whether you're at a truck stop, on the shoulder, or at your yard. 24-hour mobile mechanic, no membership required. Hablamos Español.",
+      "pricing": [
+        { "label": "Service Call",   "price": "$185",  "note": "first hour" },
+        { "label": "Hourly Labor",   "price": "$145/hr", "note": "diagnostic + repair" }
+      ],
+      "faq": [
+        { "q": "Do you have engine codes diagnostic tools?", "a": "Yes — Cummins INSITE, Detroit DDDL, Cat ET on the truck." },
+        { "q": "Can you do RVs?", "a": "Yes — Class A, B, and C diesel pushers." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1632823469850-1b7b1e8b7be9?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["semi-truck-repair", "trailer-repair", "dpf-regen"]
+    },
+    {
+      "id": "trailer-repair", "category": "Truck", "parentCategory": "truck", "isHub": false,
+      "icon": "rv_hookup", "title": "Trailer Repair",
+      "shortDesc": "Air leaks, brake chambers, lights, kingpins. On-site trailer service.",
+      "longDesc": "Trailer repair on the road in Amarillo & Texas Panhandle. Air leak air brake repair, brake chambers, slack adjusters, ABS sensors, light wiring, kingpin checks. DOT compliance work and roadside trailer tire blowout repair on I-40.",
+      "pricing": [
+        { "label": "Service Call",  "price": "$185", "note": "first hour" },
+        { "label": "Hourly Labor",  "price": "$135/hr", "note": "trailer-only labor" }
+      ],
+      "faq": [
+        { "q": "Do you do DOT inspections roadside?", "a": "Yes — annual + repair work to bring you to compliance." },
+        { "q": "Trailer tire blowouts on I-40?",     "a": "Yes — heavy trailer tire dispatch service." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1558981852-426c6c22a060?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["semi-truck-repair", "air-brake-repair", "mobile-diesel-mechanic"]
+    },
+    {
+      "id": "air-brake-repair", "category": "Truck", "parentCategory": "truck", "isHub": false,
+      "icon": "compress", "title": "Air Brake Repair (On-Road)",
+      "shortDesc": "Air leaks, slack adjusters, brake chambers, ABS faults — on-site.",
+      "longDesc": "Air brake repair on the road in Amarillo. We diagnose air leaks, replace slack adjusters and brake chambers, repair ABS sensor faults, and test compressor governor pressure on-site. Critical for DOT compliance — we get you safe and legal.",
+      "pricing": [
+        { "label": "Service Call",         "price": "$185", "note": "first hour" },
+        { "label": "Brake Chamber Replace","price": "$225+", "note": "labor only, parts at cost" }
+      ],
+      "faq": [
+        { "q": "Can you fix it at the truck stop?", "a": "Yes — most air brake repairs are mobile-friendly." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1581094289810-adf5d25690e3?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["semi-truck-repair", "trailer-repair", "dpf-regen"]
+    },
+    {
+      "id": "dpf-regen", "category": "Truck", "parentCategory": "truck", "isHub": false,
+      "icon": "filter_alt", "title": "DPF Regen Service",
+      "shortDesc": "Forced DPF regen, parametric resets, DEF system on-site.",
+      "longDesc": "DPF regen service in Amarillo & on I-40. We perform forced regens, parametric resets, and DEF system diagnostics on-site. We carry common DPF/DOC sensors and can flag bad NOx sensors. Get you back on the road without a tow.",
+      "pricing": [
+        { "label": "Forced Regen",       "price": "$285", "note": "on-site" },
+        { "label": "Parametric Reset",   "price": "$145", "note": "ECM-level" }
+      ],
+      "faq": [
+        { "q": "Will a forced regen fix me?", "a": "Most of the time — if the filter is over 100% loaded, you may need a baking service." }
+      ],
+      "badge": "", "image": "https://images.unsplash.com/photo-1597942792606-fe66e7b245d2?auto=format&fit=crop&w=900&q=80",
+      "relatedServices": ["semi-truck-repair", "mobile-diesel-mechanic", "air-brake-repair"]
+    }
+  ],
+
+  "howItWorks": [
+    { "icon": "call",         "title": "1. Call or Text",      "desc": "Tell us your location, vehicle, and the issue. Average call-to-dispatch under 60 seconds." },
+    { "icon": "share_location","title": "2. We Dispatch + GPS","desc": "We text you a live GPS tracking link so you see your tech's exact ETA on the way." },
+    { "icon": "task_alt",     "title": "3. We Fix It",         "desc": "Average arrival 22 min in Amarillo, under 45 min anywhere on I-40 in our service area." }
+  ],
+
+  "about": {
+    "title": "Local Operators. Highway Specialists.",
+    "p1": "Panhandle 24/7 Roadside is a locally owned, USDOT-certified roadside and mobile mechanic operation based in Amarillo, TX. We patrol the I-40 corridor 24 hours a day — from Adrian to Shamrock — with light-duty wreckers, heavy-duty rotators, and ASE-certified mobile diesel techs.",
+    "p2": "We don't sell memberships. We don't hide pricing. You get a flat rate before we start work, GPS tracking on every dispatch, and a tech who answers the phone in under a minute. Hablamos Español. That's the whole pitch.",
+    "image": "https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=800&q=80"
+  },
+
+  "reviews": [
+    { "author": "Mike T.",   "location": "Amarillo, TX",   "rating": 5, "text": "Blown tire at mile marker 78 on I-40 at 11pm. Called these guys and they were on scene in 19 minutes. No BS, no hidden fees, just got me back on the road. Best in the Panhandle.", "date": "2025-11-12", "platform": "google",   "serviceId": "flat-tire-repair", "responseTime": "19 min", "photo": "" },
+    { "author": "Carlos R.", "location": "Hereford, TX",   "rating": 5, "text": "Diesel quit on me at Exit 60. Called Panhandle 24/7 — mechanic showed up in 38 minutes with the part on the truck. Saved me a $1,200 tow.", "date": "2025-10-28", "platform": "google",   "serviceId": "semi-truck-repair", "responseTime": "38 min", "photo": "" },
+    { "author": "Kim L.",    "location": "Canyon, TX",     "rating": 5, "text": "Locked my keys in the car at WT campus. They came out, no damage, no membership BS. $75 flat. Done in 22 min.", "date": "2025-10-15", "platform": "yelp",     "serviceId": "car-lockout", "responseTime": "22 min", "photo": "" },
+    { "author": "Dale H.",   "location": "Pampa, TX",      "rating": 5, "text": "Battery died at the truck stop in Pampa. They jumped me, tested the alternator, and sold me a new battery on the spot at a fair price. Real pros.", "date": "2025-09-30", "platform": "facebook", "serviceId": "jump-start", "responseTime": "27 min", "photo": "" },
+    { "author": "Jorge M.",  "location": "Shamrock, TX",   "rating": 5, "text": "Trailer tire blowout at Exit 152 westbound. Got us rolling in under an hour. Direct billed our company. Solid outfit.", "date": "2025-09-12", "platform": "google",   "serviceId": "trailer-repair", "responseTime": "44 min", "photo": "" },
+    { "author": "Tom B.",    "location": "Tucumcari, NM",  "rating": 5, "text": "Stuck in mud after a wrong turn. Their winch truck pulled me out without a scratch. Hablamos Español was a bonus for my passenger.", "date": "2025-08-19", "platform": "google",   "serviceId": "winch-out", "responseTime": "51 min", "photo": "" }
+  ],
+
+  "fleet": {
+    "title": "Fleet & Commercial Accounts",
+    "subtitle": "NET-30 billing. Direct insurance bill. Priority dispatch.",
+    "body": "We work with trucking companies, delivery fleets, and insurance carriers across the Texas Panhandle. Open a commercial account for NET-30 invoicing, direct bill to most major insurance carriers, dedicated dispatch line, priority response on I-40, and monthly fleet reports.",
+    "image": "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?auto=format&fit=crop&w=1200&q=80"
+  },
+
+  "serviceAreas": [
+    { "city": "Amarillo",   "state": "TX", "driveTime": "0 min",  "slug": "amarillo-tx",   "lat": 35.2006, "lng": -101.8210, "neighborhoods": ["Downtown", "Wolflin", "Soncy", "Bell Street", "Coulter"], "metaTitle": "24/7 Roadside Assistance Amarillo TX | Panhandle 24/7 Roadside", "metaDescription": "Stuck in Amarillo? 22-min average dispatch. Towing, mobile mechanic, jump start, lockout, fuel, flat tire. Call (806) 555-0140. Hablamos Español.", "showInNav": false },
+    { "city": "Canyon",     "state": "TX", "driveTime": "20 min", "slug": "canyon-tx",     "lat": 34.9803, "lng": -101.9188, "neighborhoods": ["WT Campus", "I-27 Corridor", "Hunsley Hills"], "metaTitle": "24/7 Roadside Assistance Canyon TX | Panhandle 24/7 Roadside", "metaDescription": "Roadside in Canyon TX. 20 min from our Amarillo dispatch. WT campus, I-27 corridor. Towing, jump start, lockout. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Hereford",   "state": "TX", "driveTime": "45 min", "slug": "hereford-tx",   "lat": 34.8151, "lng": -102.3974, "neighborhoods": ["Downtown", "Park Ave", "US-60 Corridor"], "metaTitle": "24/7 Roadside Assistance Hereford TX | Panhandle 24/7 Roadside", "metaDescription": "Stuck in Hereford TX? Tow truck, mobile mechanic, flat tire change. 45 min from Amarillo dispatch. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Dumas",      "state": "TX", "driveTime": "55 min", "slug": "dumas-tx",      "lat": 35.8651, "lng": -101.9732, "neighborhoods": ["Dumas Avenue", "US-87 Corridor"], "metaTitle": "Mobile Mechanic Dumas TX | Panhandle 24/7 Roadside", "metaDescription": "Mobile mechanic Dumas TX. 24/7 roadside service. Diesel, gas, RV repairs. Call (806) 555-0140. Hablamos Español.", "showInNav": false },
+    { "city": "Pampa",      "state": "TX", "driveTime": "75 min", "slug": "pampa-tx",      "lat": 35.5361, "lng": -100.9598, "neighborhoods": ["Downtown", "Hobart St", "Loop 171"], "metaTitle": "Truck Repair Pampa TX | Panhandle 24/7 Roadside", "metaDescription": "On-the-road truck repair Pampa TX. ASE-certified diesel mechanic. Call (806) 555-0140. 24/7.", "showInNav": false },
+    { "city": "Borger",     "state": "TX", "driveTime": "65 min", "slug": "borger-tx",     "lat": 35.6678, "lng": -101.3974, "neighborhoods": ["Downtown", "TX-136 Corridor"], "metaTitle": "Semi Truck Repair Borger TX | Panhandle 24/7 Roadside", "metaDescription": "Semi truck repair Borger TX. Mobile diesel mechanic. Call (806) 555-0140. 24/7.", "showInNav": false },
+    { "city": "Stratford",  "state": "TX", "driveTime": "95 min", "slug": "stratford-tx",  "lat": 36.3392, "lng": -102.0735, "neighborhoods": ["Downtown", "US-54 Corridor"], "metaTitle": "24/7 Roadside Stratford TX | Panhandle 24/7 Roadside", "metaDescription": "Roadside Stratford TX. 95 min from Amarillo. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Spearman",   "state": "TX", "driveTime": "100 min","slug": "spearman-tx",   "lat": 36.1995, "lng": -101.1932, "neighborhoods": ["Downtown", "TX-15 Corridor"], "metaTitle": "Tow Truck Spearman TX | Panhandle 24/7 Roadside", "metaDescription": "Tow truck Spearman TX. Long-distance dispatch. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Vega",       "state": "TX", "driveTime": "30 min", "slug": "vega-tx",       "lat": 35.2434, "lng": -102.4288, "neighborhoods": ["I-40 Exit 36", "US-385 Corridor"], "metaTitle": "Roadside Service Vega TX I-40 | Panhandle 24/7 Roadside", "metaDescription": "Roadside service Vega TX I-40. Exit 36. Tow, mobile mechanic. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Groom",      "state": "TX", "driveTime": "50 min", "slug": "groom-tx",      "lat": 35.2014, "lng": -101.1071, "neighborhoods": ["I-40 Exit 124", "Groom Cross"], "metaTitle": "Towing Groom TX I-40 | Panhandle 24/7 Roadside", "metaDescription": "Towing Groom TX I-40 Exit 124. 24/7 dispatch. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Shamrock",   "state": "TX", "driveTime": "85 min", "slug": "shamrock-tx",   "lat": 35.2148, "lng": -100.2493, "neighborhoods": ["I-40 Exit 152", "US-83 Corridor"], "metaTitle": "Roadside Assistance Shamrock TX I-40 | Panhandle 24/7 Roadside", "metaDescription": "Roadside Shamrock TX I-40 Exit 152. East side of our service area. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Wellington", "state": "TX", "driveTime": "85 min", "slug": "wellington-tx", "lat": 34.8567, "lng": -100.2143, "neighborhoods": ["US-83 Corridor"], "metaTitle": "Mobile Mechanic Wellington TX | Panhandle 24/7 Roadside", "metaDescription": "Mobile mechanic Wellington TX. Call (806) 555-0140. 24/7.", "showInNav": false },
+    { "city": "Claude",     "state": "TX", "driveTime": "35 min", "slug": "claude-tx",     "lat": 35.1142, "lng": -101.3582, "neighborhoods": ["US-287 Corridor"], "metaTitle": "Tow Truck Claude TX | Panhandle 24/7 Roadside", "metaDescription": "Tow truck Claude TX. US-287 corridor. Call (806) 555-0140.", "showInNav": false },
+    { "city": "Panhandle",  "state": "TX", "driveTime": "30 min", "slug": "panhandle-tx",  "lat": 35.3409, "lng": -101.3793, "neighborhoods": ["US-60 Corridor"], "metaTitle": "Roadside Panhandle TX | Panhandle 24/7 Roadside", "metaDescription": "Roadside Panhandle TX. Call (806) 555-0140. 24/7.", "showInNav": false },
+    { "city": "Tucumcari",  "state": "NM", "driveTime": "115 min","slug": "tucumcari-nm",  "lat": 35.1717, "lng": -103.7250, "neighborhoods": ["I-40 Exit 332", "Route 66"], "metaTitle": "Tow Truck Tucumcari NM I-40 | Panhandle 24/7 Roadside", "metaDescription": "Tow truck Tucumcari NM. I-40 westbound dispatch. Call (806) 555-0140.", "showInNav": false }
+  ],
+
+  "i40Exits": [
+    { "exit": "22",  "name": "Adrian",            "city": "Adrian",   "slug": "i40-exit-22-adrian",      "mileMarker": "22",  "metaTitle": "Tow Truck I-40 Exit 22 Adrian TX | Panhandle 24/7 Roadside", "metaDescription": "Broke down at I-40 Exit 22 Adrian TX? 24/7 tow + mobile mechanic. Call (806) 555-0140." },
+    { "exit": "36",  "name": "Vega",              "city": "Vega",     "slug": "i40-exit-36-vega",        "mileMarker": "36",  "metaTitle": "Roadside Assistance I-40 Exit 36 Vega | Panhandle 24/7 Roadside", "metaDescription": "Roadside at I-40 Exit 36 Vega. 30 min from Amarillo dispatch. Call (806) 555-0140." },
+    { "exit": "60",  "name": "Bushland",          "city": "Bushland", "slug": "i40-exit-60-bushland",    "mileMarker": "60",  "metaTitle": "Mobile Mechanic I-40 Exit 60 Bushland | Panhandle 24/7 Roadside", "metaDescription": "Mobile mechanic at I-40 Exit 60 Bushland. Call (806) 555-0140. 24/7." },
+    { "exit": "64",  "name": "Soncy Rd",          "city": "Amarillo", "slug": "i40-exit-64-soncy",       "mileMarker": "64",  "metaTitle": "Tow Truck I-40 Exit 64 Soncy Rd Amarillo | Panhandle 24/7 Roadside", "metaDescription": "Tow truck I-40 Exit 64 Soncy Rd Amarillo. Call (806) 555-0140." },
+    { "exit": "70",  "name": "Coulter",           "city": "Amarillo", "slug": "i40-exit-70-coulter",     "mileMarker": "70",  "metaTitle": "Roadside I-40 Exit 70 Coulter Amarillo | Panhandle 24/7 Roadside", "metaDescription": "Roadside I-40 Exit 70 Coulter. Call (806) 555-0140." },
+    { "exit": "73",  "name": "Bell Street",       "city": "Amarillo", "slug": "i40-exit-73-bell",        "mileMarker": "73",  "metaTitle": "Tow Truck I-40 Exit 73 Bell St Amarillo | Panhandle 24/7 Roadside", "metaDescription": "Tow Bell St I-40 Exit 73 Amarillo. Call (806) 555-0140." },
+    { "exit": "75",  "name": "Western St",        "city": "Amarillo", "slug": "i40-exit-75-western",     "mileMarker": "75",  "metaTitle": "Roadside I-40 Exit 75 Western Amarillo | Panhandle 24/7 Roadside", "metaDescription": "I-40 Exit 75 Western Amarillo roadside. Call (806) 555-0140." },
+    { "exit": "76",  "name": "Georgia St",        "city": "Amarillo", "slug": "i40-exit-76-georgia",     "mileMarker": "76",  "metaTitle": "Mobile Mechanic I-40 Exit 76 Georgia Amarillo | Panhandle 24/7 Roadside", "metaDescription": "Mechanic Exit 76 Georgia Amarillo. Call (806) 555-0140." },
+    { "exit": "78",  "name": "Washington",        "city": "Amarillo", "slug": "i40-exit-78-washington",  "mileMarker": "78",  "metaTitle": "Tow Truck I-40 Exit 78 Washington Amarillo | Panhandle 24/7 Roadside", "metaDescription": "Tow Exit 78 Washington Amarillo. Call (806) 555-0140." },
+    { "exit": "81",  "name": "Ross / Osage",      "city": "Amarillo", "slug": "i40-exit-81-ross-osage",  "mileMarker": "81",  "metaTitle": "Roadside I-40 Exit 81 Ross Osage Amarillo | Panhandle 24/7 Roadside", "metaDescription": "Roadside Exit 81 Ross/Osage. Call (806) 555-0140." },
+    { "exit": "85",  "name": "Whitaker Rd",       "city": "Amarillo", "slug": "i40-exit-85-whitaker",    "mileMarker": "85",  "metaTitle": "Tow Truck I-40 Exit 85 Whitaker Rd | Panhandle 24/7 Roadside", "metaDescription": "Tow Exit 85 Whitaker Rd. Call (806) 555-0140." },
+    { "exit": "96",  "name": "Lakeside",          "city": "Amarillo", "slug": "i40-exit-96-lakeside",    "mileMarker": "96",  "metaTitle": "Roadside I-40 Exit 96 Lakeside Amarillo | Panhandle 24/7 Roadside", "metaDescription": "Roadside Exit 96 Lakeside Amarillo. Call (806) 555-0140." },
+    { "exit": "110", "name": "Conway",            "city": "Conway",   "slug": "i40-exit-110-conway",     "mileMarker": "110", "metaTitle": "Tow Truck I-40 Exit 110 Conway TX | Panhandle 24/7 Roadside", "metaDescription": "Tow Exit 110 Conway TX. Call (806) 555-0140." },
+    { "exit": "124", "name": "Groom",             "city": "Groom",    "slug": "i40-exit-124-groom",      "mileMarker": "124", "metaTitle": "Roadside I-40 Exit 124 Groom TX | Panhandle 24/7 Roadside", "metaDescription": "Roadside Exit 124 Groom TX. Call (806) 555-0140." },
+    { "exit": "132", "name": "Alanreed",          "city": "Alanreed", "slug": "i40-exit-132-alanreed",   "mileMarker": "132", "metaTitle": "Tow Truck I-40 Exit 132 Alanreed | Panhandle 24/7 Roadside", "metaDescription": "Tow Exit 132 Alanreed. Call (806) 555-0140." },
+    { "exit": "152", "name": "Shamrock",          "city": "Shamrock", "slug": "i40-exit-152-shamrock",   "mileMarker": "152", "metaTitle": "Roadside I-40 Exit 152 Shamrock TX | Panhandle 24/7 Roadside", "metaDescription": "Roadside Exit 152 Shamrock TX. Call (806) 555-0140." }
+  ],
+
+  "highways": [
+    { "name": "I-40",   "label": "Interstate 40 — East/West",        "slug": "i40" },
+    { "name": "I-27",   "label": "Interstate 27 — North/South",      "slug": "i27" },
+    { "name": "US-87",  "label": "US Route 87",                      "slug": "us87" },
+    { "name": "US-287", "label": "US Route 287",                     "slug": "us287" },
+    { "name": "US-60",  "label": "US Route 60",                      "slug": "us60" },
+    { "name": "Loop 335","label": "Loop 335 (Amarillo Beltway)",     "slug": "loop335" }
+  ],
+
+  "pages": [
+    {
+      "id": "our-story", "title": "About Panhandle 24/7 Roadside", "showInNav": false,
+      "metaDescription": "Locally owned, USDOT-certified roadside and mobile mechanic operation in Amarillo, TX. Texas Panhandle's I-40 specialists.",
+      "blocks": [
+        { "type": "heading", "content": "Local Operators. Highway Specialists.", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "Panhandle 24/7 Roadside is a locally owned, USDOT-certified roadside and mobile mechanic operation based in Amarillo, TX. We patrol the I-40 corridor 24 hours a day — from Adrian to Shamrock — with light-duty wreckers, heavy-duty rotators, and ASE-certified mobile diesel techs." },
+        { "type": "heading", "content": "Why Drivers Call Us First", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "Flat-rate pricing — you know the cost before we start. GPS tracking on every dispatch. ASE certified. Hablamos Español. No memberships, no hidden fees." },
+        { "type": "spacer", "size": "medium" },
+        { "type": "link", "label": "📞 Call (806) 555-0140", "href": "tel:+18065550140", "style": "button", "newTab": false }
+      ]
+    },
+    {
+      "id": "contact", "title": "Contact Panhandle 24/7 Roadside", "showInNav": false,
+      "metaDescription": "Call (806) 555-0140 for 24/7 roadside dispatch in Amarillo & I-40. Service request form, address, hours.",
+      "blocks": [
+        { "type": "heading", "content": "Contact Dispatch — 24/7", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "Phone: (806) 555-0140  •  Text: (806) 555-0140  •  Email: dispatch@panhandle247roadside.com  •  Hours: 24/7  •  Address: 4500 I-40 Access Rd, Amarillo, TX 79103" },
+        { "type": "heading", "content": "Submit a Dispatch Request", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "If you're stranded, calling is fastest. If you're scheduling ahead or asking a question, use the form on the homepage or this number." },
+        { "type": "spacer", "size": "medium" },
+        { "type": "link", "label": "📞 Call (806) 555-0140", "href": "tel:+18065550140", "style": "button", "newTab": false }
+      ]
+    },
+    {
+      "id": "pricing", "title": "Transparent Pricing", "showInNav": true,
+      "metaDescription": "Flat-rate pricing for towing, jump start, lockout, fuel delivery, winch-out, mobile mechanic. No memberships, no surprise bills.",
+      "blocks": [
+        { "type": "heading", "content": "Transparent Flat-Rate Pricing", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "Every service has a flat rate quoted before we start. No memberships. No surprise bills. Below is our standard rate sheet — actual quote depends on vehicle class, distance, and parts cost." },
+        { "type": "heading", "content": "Roadside Assistance", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "Flat tire change — $75  •  Battery jump start — $65  •  Car lockout — $75  •  Fuel delivery — $55 + fuel  •  Winch-out (light) — $125" },
+        { "type": "heading", "content": "Towing Services", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "Light-duty hookup (within 5 mi) — $95  •  Per-mile after 5 mi — $3.50  •  Heavy-duty hookup — $385  •  Heavy per-mile — $8.50  •  Rotator — quoted" },
+        { "type": "heading", "content": "Mobile Mechanic & Truck Repair", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "Service call (first hour) — $185  •  Hourly labor (after) — $145/hr  •  Forced DPF regen — $285  •  Parts — at cost, no markup games" },
+        { "type": "spacer", "size": "medium" },
+        { "type": "link", "label": "📞 Call for Quote — (806) 555-0140", "href": "tel:+18065550140", "style": "button", "newTab": false }
+      ]
+    },
+    {
+      "id": "service-area", "title": "Service Area", "showInNav": false,
+      "metaDescription": "100-mile radius around Amarillo, TX — Canyon, Hereford, Dumas, Pampa, Borger, Vega, Groom, Shamrock, Tucumcari NM. I-40, I-27, US-87, US-287, US-60.",
+      "blocks": [
+        { "type": "heading", "content": "Our Service Area — 100 Miles Around Amarillo", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "We serve the entire Texas Panhandle and into eastern New Mexico, with primary focus on the I-40 corridor from Adrian, TX to Shamrock, TX. 24/7 dispatch, average arrival under 45 min anywhere in the service area." },
+        { "type": "heading", "content": "Cities We Serve", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "Amarillo • Canyon • Hereford • Dumas • Pampa • Borger • Stratford • Spearman • Vega • Groom • Shamrock • Wellington • Claude • Panhandle TX • Tucumcari NM" },
+        { "type": "heading", "content": "Highway Corridors We Patrol", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "I-40 (mile markers 22 to 152) • I-27 • US-87 • US-287 • US-60 • Loop 335" }
+      ]
+    },
+    {
+      "id": "roadside-hub", "title": "Roadside Assistance — Amarillo, TX", "showInNav": false,
+      "metaDescription": "Full Roadside Assistance services in Amarillo & the Texas Panhandle. Flat tire, jump start, lockout, fuel delivery, winch-out. 24/7. Call (806) 555-0140.",
+      "blocks": [
+        { "type": "heading", "content": "Roadside Assistance — Amarillo, TX", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "When you need roadside assistance, you need it now. Panhandle 24/7 Roadside operates 24/7 across the Texas Panhandle with USDOT-certified technicians, heavy-duty equipment, and flat-rate pricing. No hidden fees. No membership required." },
+        { "type": "heading", "content": "Our Roadside Services", "level": "h2", "align": "left" },
+        { "type": "link", "label": "→ Flat Tire Change & Repair", "href": "service.html?id=flat-tire-repair", "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Battery Jump Start",         "href": "service.html?id=jump-start",        "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Car Lockout Service",        "href": "service.html?id=car-lockout",       "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Fuel Delivery",              "href": "service.html?id=fuel-delivery",     "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Winch-Out & Recovery",       "href": "service.html?id=winch-out",         "style": "inline", "newTab": false },
+        { "type": "spacer", "size": "medium" },
+        { "type": "link", "label": "📞 Call Now — (806) 555-0140", "href": "tel:+18065550140", "style": "button", "newTab": false }
+      ]
+    },
+    {
+      "id": "towing-hub", "title": "Towing Services — Amarillo, TX", "showInNav": false,
+      "metaDescription": "Light-duty, heavy-duty, and long-distance towing across Amarillo & the Texas Panhandle. 75-ton rotator. GPS tracked. Call (806) 555-0140.",
+      "blocks": [
+        { "type": "heading", "content": "Towing Services — Amarillo, TX", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "Light-duty wreckers, heavy-duty rotators, and long-distance towing across the Texas Panhandle and the I-40 corridor. USDOT certified. GPS-tracked dispatch. Direct insurance billing." },
+        { "type": "heading", "content": "Our Towing Services", "level": "h2", "align": "left" },
+        { "type": "link", "label": "→ Light-Duty Towing",     "href": "service.html?id=light-duty-towing",   "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Heavy-Duty Towing",     "href": "service.html?id=heavy-duty-towing",   "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Long-Distance Towing",  "href": "service.html?id=long-distance-towing","style": "inline", "newTab": false },
+        { "type": "spacer", "size": "medium" },
+        { "type": "link", "label": "📞 Call Now — (806) 555-0140", "href": "tel:+18065550140", "style": "button", "newTab": false }
+      ]
+    },
+    {
+      "id": "truck-repair", "title": "Mobile Truck Repair — Amarillo, TX", "showInNav": false,
+      "metaDescription": "ASE-certified mobile diesel mechanic in Amarillo & I-40. Semi truck, trailer, air brake, DPF regen on the road. Call (806) 555-0140.",
+      "blocks": [
+        { "type": "heading", "content": "Mobile Truck & Diesel Repair — Amarillo, TX", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "ASE-certified mobile diesel mechanic dispatched to your truck on I-40, I-27, US-87, or US-287. We carry common parts for Cummins, Detroit, Volvo, Cat, and Paccar — get you back on the road without a tow." },
+        { "type": "heading", "content": "Our Truck Repair Services", "level": "h2", "align": "left" },
+        { "type": "link", "label": "→ Semi Truck Repair (On-Site)", "href": "service.html?id=semi-truck-repair",     "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Mobile Diesel Mechanic",      "href": "service.html?id=mobile-diesel-mechanic","style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Trailer Repair",              "href": "service.html?id=trailer-repair",        "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ Air Brake Repair",            "href": "service.html?id=air-brake-repair",      "style": "inline", "newTab": false },
+        { "type": "link", "label": "→ DPF Regen Service",           "href": "service.html?id=dpf-regen",             "style": "inline", "newTab": false },
+        { "type": "spacer", "size": "medium" },
+        { "type": "link", "label": "📞 Call Now — (806) 555-0140", "href": "tel:+18065550140", "style": "button", "newTab": false }
+      ]
+    },
+    {
+      "id": "fleet", "title": "Fleet & Commercial Accounts", "showInNav": false,
+      "metaDescription": "Fleet roadside service Amarillo. NET-30 billing, direct insurance bill, priority dispatch on I-40. Call (806) 555-0140.",
+      "blocks": [
+        { "type": "heading", "content": "Fleet & Commercial Accounts", "level": "h1", "align": "left" },
+        { "type": "paragraph", "content": "We work with trucking companies, delivery fleets, and insurance carriers across the Texas Panhandle. Open a commercial account for NET-30 invoicing, direct bill to most major insurance carriers, dedicated dispatch line, and priority response on I-40." },
+        { "type": "heading", "content": "Account Benefits", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "NET-30 invoicing  •  Direct insurance billing  •  Dedicated dispatch line  •  Priority response on I-40  •  Monthly fleet reports  •  USDOT compliance support" },
+        { "type": "heading", "content": "Open an Account", "level": "h2", "align": "left" },
+        { "type": "paragraph", "content": "Email dispatch@panhandle247roadside.com or call (806) 555-0140 to set up an account. We'll send you the credit application and onboarding packet same-day." },
+        { "type": "spacer", "size": "medium" },
+        { "type": "link", "label": "📞 Call (806) 555-0140", "href": "tel:+18065550140", "style": "button", "newTab": false }
+      ]
+    }
+  ],
+
+  "labels": {
+    "callBtn": "CALL",
+    "textBtn": "TEXT",
+    "servicesFooterLabel": "Services",
+    "companyFooterLabel": "Company"
+  },
+
+  "sections": {
+    "services": {
+      "heading": "Our Roadside Services",
+      "subheading": "From standard passenger vehicles to heavy-duty Class 8 commercial fleets — flat rates, no hidden fees."
+    },
+    "howItWorks": {
+      "subheading": "Three steps. Average 22 minutes door to dispatch."
+    }
+  },
+
+  "ui": {
+    "hero": {
+      "emergencyPill": "24/7 EMERGENCY RESPONSE",
+      "etaUnit": "MINUTES",
+      "etaSubLabel": "Estimated Arrival",
+      "etaTechLabel": "Closest technician at:",
+      "etaCalcButton": "Calculate ETA",
+      "etaFormLocationLabel": "Location / Exit #",
+      "etaFormLocationPlaceholder": "e.g. I-40 Exit 75",
+      "etaFormVehicleLabel": "Vehicle Type"
+    },
+    "stats": {
+      "responseLabel": "Avg Response",
+      "citiesLabel": "Cities Served",
+      "jobsLabel": "Jobs Completed",
+      "ratingLabel": "Customer Rating"
+    },
+    "trustStrip": {
+      "heading": ""
+    },
+    "services": {
+      "viewAllPrefix": "View All",
+      "viewAllSuffix": "→"
+    },
+    "howItWorks": {
+      "heading": "How It Works"
+    },
+    "reviews": {
+      "heading": "What Customers Say",
+      "subtitlePrefix": "Based on",
+      "subtitleSuffix": "verified reviews",
+      "responseLabel": "response"
+    },
+    "fleet": {
+      "ctaLabel": "Open a Fleet Account"
+    },
+    "radius": {
+      "heading": "Our Service Radius",
+      "subheadingPrefix": "Serving a 100-mile radius around",
+      "subheadingSuffix": "and the entire I-40 corridor.",
+      "centerNumber": "100 MILE",
+      "centerLabel": "Coverage"
+    },
+    "contact": {
+      "heading": "Dispatch Request",
+      "subheading": "Stranded? Calling is fastest. Use this form to schedule ahead or ask a question.",
+      "nameLabel": "Name",
+      "phoneLabel": "Phone",
+      "vehicleTypeLabel": "Vehicle Type",
+      "vehicleTypePlaceholder": "e.g. 2022 F-150 / Class 8 Freightliner",
+      "serviceNeededLabel": "Service Needed",
+      "selectPlaceholder": "Select…",
+      "locationLabel": "Location / Exit #",
+      "locationPlaceholder": "e.g. I-40 Exit 75 westbound",
+      "notesLabel": "Notes",
+      "submitButton": "Send Dispatch Request",
+      "dispatchHqHeading": "Dispatch HQ",
+      "geolocationTitle": "Use my current location"
+    },
+    "serviceDetail": {
+      "pricingHeading": "Transparent Pricing",
+      "faqHeading": "Frequently Asked Questions",
+      "relatedHeading": "You Might Also Need",
+      "noFoundTitle": "Service not found",
+      "noFoundBody": "The service you're looking for isn't on file. View all services or call us 24/7.",
+      "noFoundCta": "← All Services"
+    },
+    "footer": {
+      "servicesHeading": "Services",
+      "companyHeading": "Company",
+      "serviceAreaHeading": "Service Area",
+      "aboutLink": "About",
+      "serviceAreaLink": "Service Area",
+      "pricingLink": "Pricing",
+      "fleetLink": "Fleet",
+      "contactLink": "Contact",
+      "copyrightSpanish": "Hablamos Español",
+      "copyrightUsdotPrefix": "USDOT"
+    },
+    "mobileCTA": {
+      "callLabel": "CALL",
+      "textLabel": "TEXT",
+      "locationLabel": "LOCATION"
+    },
+    "pageNotFound": {
+      "title": "Page not found",
+      "body": "The page you're looking for doesn't exist. Head back home or call us 24/7.",
+      "cta": "← Home"
+    },
+    "servicesPage": {
+      "heroHeading": "All Roadside Services",
+      "heroSubheading": "Every service we dispatch — flat rate, 24/7, across the Texas Panhandle.",
+      "ctaStripHeading": "Need help now?",
+      "ctaStripSubheading": "We dispatch 24/7 across the Texas Panhandle.",
+      "callButton": "CALL NOW",
+      "textButton": "TEXT US"
+    },
+    "fleetPage": {
+      "heroHeading": "Fleet & Commercial Accounts",
+      "heroSubheading": "NET-30 billing, direct insurance, priority I-40 dispatch.",
+      "callButton": "CALL NOW",
+      "openAccountButton": "Open an Account",
+      "statsHeading": "Built for Commercial Operators",
+      "statNet30": "NET-30 Billing",
+      "statDirectInsurance": "Direct Insurance Bill",
+      "statPriority": "Priority I-40 Dispatch",
+      "statDedicated": "24/7 Dedicated Line",
+      "benefitsHeading": "Account Benefits",
+      "formHeading": "Request a Fleet Account",
+      "formSubheading": "Tell us about your fleet — we'll send a credit application and onboarding packet same-day.",
+      "formCompanyLabel": "Company Name",
+      "formManagerLabel": "Fleet Manager Name",
+      "formPhoneLabel": "Phone",
+      "formEmailLabel": "Email",
+      "formVehicleCountLabel": "Number of Vehicles",
+      "formVehicleTypesLabel": "Vehicle Types",
+      "formNotesLabel": "Notes / Special Requirements",
+      "formSubmit": "Request Fleet Account"
+    },
+    "areaPage": {
+      "heroHeading": "We Cover the Entire Texas Panhandle",
+      "heroSubheading": "100-mile radius · I-40 from Adrian to Shamrock · 24/7 dispatch",
+      "callButton": "CALL NOW",
+      "statsHeading": "Coverage at a Glance",
+      "statRadius": "100 Mile Radius",
+      "statCities": "15+ Cities",
+      "statExits": "16 I-40 Exits",
+      "statHours": "24/7 Dispatch",
+      "citiesHeading": "Cities We Serve",
+      "highwaysHeading": "Highway Corridors",
+      "exitsHeading": "I-40 Exit Coverage",
+      "townsHeading": "Surrounding Towns We Also Serve"
+    },
+    "pricingPage": {
+      "heroHeading": "Transparent Flat-Rate Pricing",
+      "heroSubheading": "No memberships. No hidden fees. Know your cost before we arrive.",
+      "trustPill1": "Flat Rate Always",
+      "trustPill2": "No Membership",
+      "trustPill3": "Quoted Before We Start",
+      "callForQuote": "Call for Quote",
+      "faqHeading": "Pricing Questions",
+      "faq1Q": "Is there a callout fee?",
+      "faq1A": "No — you pay the flat service rate only.",
+      "faq2Q": "Do prices include parts?",
+      "faq2A": "Labor is flat rate. Parts are at cost, no markup.",
+      "faq3Q": "Do you accept cards?",
+      "faq3A": "Yes — all major cards, cash, and commercial net-30.",
+      "faq4Q": "Can I get a quote before you arrive?",
+      "faq4A": "Yes — always. We quote before dispatch.",
+      "ctaHeading": "Ready to get back on the road?",
+      "ctaSubheading": "Call dispatch — we'll quote your job before we leave the yard."
+    },
+    "contactPage": {
+      "heroHeading": "Contact Dispatch — 24/7",
+      "heroSubheading": "Calling is fastest. The form below works for scheduled jobs and questions.",
+      "callButton": "CALL NOW",
+      "textButton": "TEXT US",
+      "infoHeading": "Dispatch HQ",
+      "hoursLabel": "Hours",
+      "addressLabel": "Address",
+      "emailLabel": "Email"
+    }
+  },
+
+  "safetyCompliance": {
+    "enabled": true,
+    "title": "Safety & Compliance Standards",
+    "subtitle": "FMCSA-compliant operations, ASE-certified technicians, Hazmat-aware recovery",
+    "items": [
+      { "icon": "verified_user",         "title": "FMCSA Compliance Guarantee",    "desc": "All operations meet Federal Motor Carrier Safety Administration standards. DOT# 4262689 on file." },
+      { "icon": "local_fire_department", "title": "Hazmat-Safe Recovery",          "desc": "Certified Hazmat awareness for accident recovery scenarios on I-40 and Texas Panhandle highways." },
+      { "icon": "assignment_turned_in",  "title": "Weekly Fleet Safety Audits",    "desc": "All vehicles and equipment audited weekly. Full DOT inspection records maintained on file." },
+      { "icon": "workspace_premium",     "title": "ASE Certified Heavy-Duty Techs","desc": "All diesel technicians hold active ASE Heavy Truck certifications — not just roadside helpers." }
+    ]
+  },
+
+  "popup": {
+    "enabled": false,
+    "image": "",
+    "altText": "Free Jump Start with First Tow",
+    "link": "tel:+18065550140",
+    "delay": 8000
+  },
+
+  "seo": {
+    "defaultTitle": "Panhandle 24/7 Roadside | 24/7 Roadside Assistance & Mobile Mechanic Amarillo TX — (806) 555-0140",
+    "defaultDescription": "Stranded on I-40 or stuck in Amarillo? Panhandle 24/7 Roadside delivers 24/7 roadside assistance, mobile mechanic, semi truck repair, towing, jump starts, lockouts, fuel & flat tire service across the Texas Panhandle. Avg ETA 22 min. Call (806) 555-0140 — Hablamos Español.",
+    "defaultKeywords": "roadside assistance Amarillo TX, 24 hour mobile mechanic Amarillo, semi truck repair I-40, towing Amarillo Texas Panhandle, flat tire change, jump start, lockout, fuel delivery, winch out, heavy duty wrecker",
+    "geoRegion": "US-TX",
+    "geoPlacename": "Amarillo",
+    "geoLat": "35.2006",
+    "geoLng": "-101.8210",
+    "canonicalBase": "https://panhandle247roadside.com",
+    "phone": "+18065550140",
+    "dotNumber": "4262689",
+    "ratingValue": "4.9",
+    "reviewCount": "247",
+    "serviceRadiusMeters": "160934",
+    "socialLinks": [
+      { "label": "Facebook", "url": "https://www.facebook.com/panhandle247roadside" },
+      { "label": "Google",   "url": "https://www.google.com/maps/place/panhandle247roadside" },
+      { "label": "Yelp",     "url": "https://www.yelp.com/biz/panhandle-247-roadside-amarillo" }
+    ],
+    "keywordBank": {
+      "primary": [
+        "roadside assistance Amarillo TX","24 hour roadside assistance Amarillo","mobile mechanic Amarillo TX",
+        "emergency roadside service Amarillo","truck breakdown service Amarillo I-40","24/7 towing Amarillo TX",
+        "semi truck repair Amarillo Texas","mobile diesel mechanic Amarillo","heavy duty towing Amarillo",
+        "flat tire change Amarillo","car battery jump start Amarillo","locked out of car Amarillo",
+        "fuel delivery Amarillo TX","winch out service Amarillo","24 hour wrecker service Amarillo",
+        "I-40 roadside assistance Texas Panhandle","I-27 towing service","mobile truck repair I-40 Amarillo"
+      ],
+      "longTail": [
+        "roadside assistance near me Amarillo","tow truck near me Amarillo open now",
+        "mobile mechanic near me 24 hours Amarillo","cheap tow truck Amarillo TX","emergency tire change near me",
+        "dead battery jumpstart near me Amarillo","gas delivery near me Amarillo","car lockout service near me Amarillo",
+        "RV tire repair Amarillo","motorcycle towing Amarillo","luxury car towing Amarillo flatbed",
+        "EV towing Amarillo Tesla","diesel mechanic on call Amarillo","DOT inspection roadside repair Amarillo",
+        "trailer tire blowout repair I-40","semi truck jumpstart Texas Panhandle","24 hour truck tire repair Amarillo",
+        "mobile truck mechanic open 24 hours","heavy wrecker rotator Amarillo","jackknife recovery Texas Panhandle",
+        "rollover recovery I-40","load swap service Amarillo","power unit swap Amarillo",
+        "DPF regen service Amarillo","air brake repair on the road Amarillo"
+      ],
+      "geoCity": [
+        "roadside assistance Canyon TX","tow truck Hereford TX 24/7","mobile mechanic Dumas TX",
+        "truck repair Pampa TX","semi truck repair Borger TX","roadside assistance Stratford TX",
+        "tow truck Spearman TX","roadside service Vega TX I-40","towing Groom TX I-40",
+        "roadside assistance Shamrock TX I-40","mobile mechanic Wellington TX","tow truck Claude TX",
+        "roadside Panhandle TX","truck repair White Deer TX","tow truck Bushland TX I-40",
+        "mechanic Wildorado TX","roadside Adrian TX I-40","roadside Conway TX I-40",
+        "tow truck Tucumcari NM I-40","truck repair Clarendon TX","mobile mechanic Tulia TX","roadside Perryton TX"
+      ],
+      "i40Exits": [
+        "tow truck I-40 exit 22 Adrian TX","roadside assistance I-40 exit 36 Vega",
+        "mobile mechanic I-40 exit 60 Bushland","tow truck I-40 exit 64 Soncy Rd Amarillo",
+        "roadside I-40 exit 70 Coulter Amarillo","tow truck I-40 exit 73 Bell Street Amarillo",
+        "roadside I-40 exit 75 Western Amarillo","mobile mechanic I-40 exit 76 Georgia Amarillo",
+        "tow truck I-40 exit 78 Washington Amarillo","roadside I-40 exit 81 Ross Osage Amarillo",
+        "tow truck I-40 exit 85 Whitaker Rd","roadside I-40 exit 96 Lakeside Amarillo",
+        "tow truck I-40 exit 110 Conway TX","roadside I-40 exit 124 Groom TX",
+        "tow truck I-40 exit 132 Alanreed","roadside I-40 exit 152 Shamrock TX"
+      ],
+      "fleet": [
+        "fleet roadside service Amarillo","commercial truck account towing Texas Panhandle",
+        "NET-30 fleet billing Amarillo","DOT compliant towing Amarillo","insurance approved tow company Amarillo",
+        "direct bill insurance towing","heavy duty rotator service Amarillo","75 ton rotator crane service",
+        "cargo recovery I-40 Texas","HazMat towing certified Amarillo","trucking company contract roadside",
+        "24/7 dispatch commercial fleet","preferred provider roadside trucking"
+      ],
+      "problemAware": [
+        "my truck broke down on I-40","semi truck overheating on I-40","flat tire on the highway Texas Panhandle",
+        "locked keys in car Amarillo","ran out of gas I-40 Amarillo","car wont start Amarillo TX",
+        "dead battery in parking lot Amarillo","jackknife semi truck I-40","truck stuck in mud Texas Panhandle",
+        "trailer tire blowout I-40","diesel wont start cold Amarillo","DEF problems mobile repair",
+        "ABS warning light truck repair","air leak air brake repair on road"
+      ],
+      "lsi": [
+        "AAA certified","ASE certified","licensed and insured","USDOT","24/7 dispatch","fast response",
+        "30-minute ETA","no membership required","upfront pricing","transparent pricing","pay-per-use",
+        "family owned","locally owned","Texas Panhandle","Potter County","Randall County","Oldham County",
+        "Carson County","Gray County","Hutchinson County","Hablamos Español","bilingual dispatch",
+        "GPS tracking","real-time arrival","live tracking","battery replacement","jumper cables",
+        "tire iron","lug wrench","spare tire","fuel jerry can","slim jim","lockout tool","key fob programming",
+        "push button start","smart key","transponder key",
+        "FMCSA compliant","weekly safety audit","Hazmat-safe recovery","Safety Manager on staff"
+      ],
+      "entities": [
+        "Interstate 40","Interstate 27","US Route 87","US Route 287","US Route 60","Loop 335",
+        "Texas Panhandle","Potter County TX","Randall County TX","Palo Duro Canyon","Cadillac Ranch",
+        "Rick Husband Amarillo International Airport","Route 66","Mother Road","Llano Estacado",
+        "Love's Travel Stop I-40 East Amarillo","Flying J Truck Stop Exit 76 Amarillo",
+        "Pilot Travel Center Lakeside Drive Amarillo","I-40 Mile Marker 60-80 Texas Panhandle",
+        "I-27 Corridor Amarillo Canyon"
+      ]
+    },
+    "metaTemplates": {
+      "service": "{service.title} {seo.geoPlacename} TX | {brand} 24/7 — {phoneDisplay}",
+      "city":    "24/7 Roadside Assistance {city} {state} | {brand} — {phoneDisplay}",
+      "exit":    "Tow Truck I-40 Exit {exit} {name} {city} | {brand} — {phoneDisplay}",
+      "hub":     "{category.label} Services {city} TX | {brand} — {phoneDisplay}"
+    }
+  },
+
+  "animations": {
+    "hero":       "stagger-fade",
+    "stats":      "fade-up",
+    "trust":      "fade-up",
+    "services":   "fade-up",
+    "howItWorks": "fade-up",
+    "about":      "fade-right",
+    "reviews":    "fade-up",
+    "fleet":      "zoom-in",
+    "contact":    "fade-up",
+    "footer":     "fade-up",
+    "etaBadge":   "magnetic-pop"
+  },
+
+  "theme": {
+    "dark": {
+      "bg":"#0a1628","surface":"#1a2235","surface-alt":"#121c2e","surface-deep":"#080e1a","surface-emphasis":"#1e2940",
+      "text":"#f0eded","text-muted":"#8a9ab5","border":"#2a3650",
+      "cta":"#e10600","cta-hover":"#930300","accent":"#ecc300","header-bg":"#041a3f"
+    },
+    "light": {
+      "bg":"#fcf9f8","surface":"#ffffff","surface-alt":"#f6f3f2","surface-deep":"#f0eded","surface-emphasis":"#eae7e7",
+      "text":"#1c1b1b","text-muted":"#5e3f3a","border":"#936e68",
+      "cta":"#b30400","cta-hover":"#e10600","accent":"#715c00","header-bg":"#1a2235"
+    },
+    "defaultMode": "light",
+    "showToggle": true
+  },
+
+  "i18n": {
+    "defaultLocale": "en",
+    "alternateLocales": ["es"]
+  },
+
+  "elementStyles": {}
+}
